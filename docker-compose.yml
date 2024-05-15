@@ -1,0 +1,98 @@
+version: '3.4'
+
+services:
+  ############################
+  # Dapr placement service
+  ############################
+  host-placement-contractsupplier:
+    image: "daprio/dapr"
+    container_name: "host-placement-contractsupplier"
+    command: [ "./placement", "--port", "60008" ]
+    ports:
+      - "60008:60008"
+    networks:
+      - contractsupplier-api
+  
+  #######################################
+  # contract.app + Dapr sidecar
+  #######################################
+  contractsupplier.webapi:
+    image: ${DOCKER_REGISTRY-}contractsupplierwebapi
+    container_name: "contractsupplier.webapi"
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+    environment:	  
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - Service__Name=ContractSupplier
+      - Grafana__Loki__Url=http://loki:3100
+      - Grafana__Tempo__Url=http://tempo:4317
+      - Grafana__Tempo__SourceName=AppSource
+      - Grafana__Tempo__ServiceName=ContractSupplier
+      - ConnectionStrings__MySql__Contract=server=host.docker.internal;database=local_ContractSupplier;user=root;password=my-secret-pw;
+    ports:
+      - "5400:80"
+      - "3500:3500"  
+      
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    networks:
+      - contractsupplier-api
+  
+  contractsupplier.webapi.sidecar:
+    image: "daprio/daprd:edge"
+    command:
+      [
+        "./daprd",
+        "--app-id", "contractsupplier-api",
+        "--app-port", "80",
+        "--dapr-http-port", "3500",
+        "--dapr-grpc-port", "5100",
+        "--placement-host-address", "placement:60008",
+        "--components-path", "./components"
+      ]
+    volumes:
+      - "./components/:/components"
+    depends_on:
+      - contractsupplier.webapi
+    network_mode: "service:contractsupplier.webapi"  
+
+  masterdata.api:
+    image: barretbao/master-data-api:dev1-27   
+    ports:
+      - 7119:80
+    environment:
+      PROJECT_NAME: Vela.Api
+      ASPNETCORE_URLS: http://+
+      ConnectionStrings__ConnectionStringMasterData: Server=host.docker.internal;Database=MasterData;User=root;Password=my-secret-pw
+      ConnectionStrings__SeriLog: Server=host.docker.internal;Database=SeriLog;User=root;Password=my-secret-pw
+   
+      
+  masterdata.api-dapr:
+    image: "daprio/daprd:latest"
+    command: [ 
+        "./daprd", 
+        "-app-id", "master-data-api", 
+        "-app-port", "80",
+        "--dapr-http-port", "3500",
+        "--dapr-grpc-port", "5100",
+        "--placement-host-address", "placement:50006"
+    ]
+    depends_on:
+        - placement      
+    network_mode: "service:masterdata.api"
+
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "--port", "50006"]
+    ports:
+      - "50006:50006"
+ 
+networks:
+  contractsupplier-api:
+
+
+  
+  

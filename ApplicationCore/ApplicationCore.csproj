@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.8.0" />
+		<PackageReference Include="Mapster" Version="7.4.0" />
+		<PackageReference Include="Mediator.Abstractions" Version="2.1.7" />
+		<PackageReference Include="Mediator.SourceGenerator" Version="2.1.7">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.14" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+		<PackageReference Include="MySqlConnector" Version="2.3.1" />
+		<PackageReference Include="OneOf" Version="3.0.263" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+		<PackageReference Include="VELA.Storage.Client" Version="1.0.0" />
+		<!--<PackageReference Include="VELA.WebCoreBase" Version="1.1.2-develop" />-->
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Contracts\ServiceBase\" />
+	  <Folder Include="DomainEvents\" />
+	  <Folder Include="DTOs\" />
+	  <Folder Include="Services\Common\" />
+	  <Folder Include="Specifications\" />
+	  <Folder Include="UseCases\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\VELA.WebCoreBase\VELA.WebCoreBase.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,196 @@
+{
+  "Routes": [
+    //Contract
+    {
+      "DownstreamPathTemplate": "/api/v1/contract/{everything}",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/contract/{everything}",
+      "UpstreamHttpMethod": [
+        "Post",
+        "Patch",
+        "Delete",
+        "Get"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/contract",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/contract",
+      "UpstreamHttpMethod": [
+        "Post"
+      ]
+    },
+    //Annex
+    {
+      "DownstreamPathTemplate": "/api/v1/annex/{everything}",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/annex/{everything}",
+      "UpstreamHttpMethod": [
+        "Post",
+        "Patch",
+        "Delete",
+        "Get"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/annex",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/annex",
+      "UpstreamHttpMethod": [
+        "Post"
+      ]
+    },
+    //Costing consumer
+    {
+      "DownstreamPathTemplate": "/api/v1/costing/{everything}",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/costing/{everything}",
+      "UpstreamHttpMethod": [
+        "Post"
+      ]
+    },
+    //Costing Annex
+    {
+      "DownstreamPathTemplate": "/api/v1/annexCosting/{everything}/supplier",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/annexCosting/{everything}/supplier",
+      "UpstreamHttpMethod": [
+        "Post"
+      ]
+    },
+    //Common
+    {
+      "DownstreamPathTemplate": "/api/v1/common/{everything}",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      },
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/common/{everything}",
+      "UpstreamHttpMethod": [
+        "Post"
+      ]
+    },
+    //Trigger
+    {
+      "DownstreamPathTemplate": "/api/v1/trigger/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/trigger/{everything}",
+      "UpstreamHttpMethod": [
+        "Post"
+      ]
+    },
+    //Portal
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/portal/receive/contract-activated-inactivated",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/v1/portal/receive/contract-activated-inactivated",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/portal/receive/contract-approved",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/v1/portal/receive/contract-approved",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contractsupplier-api",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/portal/receive/annex-approved",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/v1/portal/receive/annex-approved",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    }    
+  ]
+}

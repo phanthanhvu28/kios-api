@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mysql:
+    image: 'mysql:8.0.29'
+    container_name: 'mysql'
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "wwWW22@@"
+      MYSQL_ROOT_PASSWORD: "my-secret-pw"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - contract-network
+volumes:
+  mysql-data:
+
+networks:
+  contract-network:

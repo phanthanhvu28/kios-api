@@ -1,0 +1,253 @@
+# DT MAIN
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-dtmain-confirmed
+spec:
+  topic: Costing_DTMain_Confirmed
+  route: /api/v1/costing/dtmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-dtmain-inactivated
+spec:
+  topic: Costing_DTMain_Inactivated
+  route: /api/v1/costing/dtmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# DT VAS
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-dtvas-confirmed
+spec:
+  topic: Costing_DTVas_Confirmed
+  route: /api/v1/costing/dtvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-dtvas-inactivated
+spec:
+  topic: Costing_DTVas_Inactivated
+  route: /api/v1/costing/dtvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# DT BLC
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-dtblc-confirmed
+spec:
+  topic: Costing_DTBlc_Confirmed
+  route: /api/v1/costing/dtblc
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-dtblc-inactivated
+spec:
+  topic: Costing_DTBlc_Inactivated
+  route: /api/v1/costing/dtblc
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# CC MAIN
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-ccmain-confirmed
+spec:
+  topic: Costing_CCMain_Confirmed
+  route: /api/v1/costing/ccmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-ccmain-inactivated
+spec:
+  topic: Costing_CCMain_Inactivated
+  route: /api/v1/costing/ccmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# CC VAS
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-ccvas-confirmed
+spec:
+  topic: Costing_CCVas_Confirmed
+  route: /api/v1/costing/ccvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-ccvas-inactivated
+spec:
+  topic: Costing_CCVas_Inactivated
+  route: /api/v1/costing/ccvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# WH MAIN
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-whmain-confirmed
+spec:
+  topic: Costing_WHMain_Confirmed
+  route: /api/v1/costing/whmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-whmain-inactivated
+spec:
+  topic: Costing_WHMain_Inactivated
+  route: /api/v1/costing/whmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# WH VAS
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-whvas-confirmed
+spec:
+  topic: Costing_WHVas_Confirmed
+  route: /api/v1/costing/whvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-whvas-inactivated
+spec:
+  topic: Costing_WHVas_Inactivated
+  route: /api/v1/costing/whvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# FM MAIN
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmmain-confirmed
+spec:
+  topic: Costing_FMMain_Confirmed
+  route: /api/v1/costing/fmmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmmain-inactivated
+spec:
+  topic: Costing_FMMain_Inactivated
+  route: /api/v1/costing/fmmain
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# FM VAS
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmvas-confirmed
+spec:
+  topic: Costing_FMVas_Confirmed
+  route: /api/v1/costing/fmvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmvas-inactivated
+spec:
+  topic: Costing_FMVas_Inactivated
+  route: /api/v1/costing/fmvas
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+# FM BLC
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmblc-confirmed
+spec:
+  topic: Costing_FMBlc_Confirmed
+  route: /api/v1/costing/fmblc
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmblc-inactivated
+spec:
+  topic: Costing_FMBlc_Inactivated
+  route: /api/v1/costing/fmblc
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+---
+# FM Surcharge
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmsurcharge-confirmed
+spec:
+  topic: Costing_FMSurcharge_Confirmed
+  route: /api/v1/costing/fmsurcharge
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-costing-fmsurcharge-inactivated
+spec:
+  topic: Costing_FMSurcharge_Inactivated
+  route: /api/v1/costing/fmsurcharge
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api

@@ -1,0 +1,72 @@
+{
+  "Routes": [
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5400
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/portal/{supplierCode}/{status}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/v1/portal/{supplierCode}/{status}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      }
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5400
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/portal/flag",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/v1/portal/flag",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      }
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5400
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/portal/{code}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/v1/portal/{code}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      }
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5400
+        }
+      ],
+      "DownstreamPathTemplate": "/api/v1/common/s3/view-file",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/v1/common/s3/view-file",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "contractsupplier-api" ]
+      }
+    }
+  ]
+}

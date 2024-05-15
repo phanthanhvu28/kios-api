@@ -1,0 +1,46 @@
+[
+    {
+        "name": "contract-supplier-autoactive",
+        "cron": "30 1 * * *",
+        "timezone": "Asia/Ho_Chi_Minh",
+        "call_api": {
+            "url": "http://contractsupplier-api/api/v1/trigger/Contract/AutoActive",
+            "body": "",
+            "headers": "",
+            "method": "POST"
+        }
+    },
+    {
+        "name": "contract-supplier-autoinactive",
+        "cron": "30 2 * * *",
+        "timezone": "Asia/Ho_Chi_Minh",
+        "call_api": {
+            "url": "http://contractsupplier-api/api/v1/trigger/Contract/AutoInactive",
+            "body": "",
+            "headers": "",
+            "method": "POST"
+        }
+    },
+    {
+        "name": "contract-supplier-annex-autoactive",
+        "cron": "30 1 * * *",
+        "timezone": "Asia/Ho_Chi_Minh",
+        "call_api": {
+            "url": "http://contractsupplier-api/api/v1/trigger/Annex/AutoActive",
+            "body": "",
+            "headers": "",
+            "method": "POST"
+        }
+    },
+     {
+        "name": "contract-supplier-annex-autoinactive",
+        "cron": "30 2 * * *",
+        "timezone": "Asia/Ho_Chi_Minh",
+        "call_api": {
+            "url": "http://contractsupplier-api/api/v1/trigger/Annex/AutoInactive",
+            "body": "",
+            "headers": "",
+            "method": "POST"
+        }
+    }    
+]

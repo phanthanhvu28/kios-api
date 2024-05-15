@@ -1,0 +1,67 @@
+# Contract
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-portal-supplier-contract-approved
+spec:
+  topic: contract_supplier_approved
+  route: /api/v1/portal/receive/contract-approved
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-portal-supplier-contract-activated
+spec:
+  topic: contract_supplier_activated
+  route: /api/v1/portal/receive/contract-activated-inactivated
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-portal-supplier-contract-inactivated
+spec:
+  topic: contract_supplier_inactivated
+  route: /api/v1/portal/receive/contract-activated-inactivated
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+#Annex
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-portal-supplier-annex-approved
+spec:
+  topic: contract_supplier_annex_approved
+  route: /api/v1/portal/receive/annex-approved
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-portal-supplier-annex-activated
+spec:
+  topic: contract_supplier_annex_activated
+  route: /api/v1/portal/receive/contract-activated-inactivated
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: contractsupplier-portal-supplier-annex-inactivated
+spec:
+  topic: contract_supplier_annex_inactivated
+  route: /api/v1/portal/receive/contract-activated-inactivated
+  pubsubname: pubsub
+scopes:
+- contractsupplier-api
