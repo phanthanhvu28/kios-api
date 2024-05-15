@@ -1,4 +1,6 @@
-﻿using Infrastructure.Persistence;
+﻿using ApplicationCore.Contracts.RepositoryBase;
+using Infrastructure.Persistence;
+using Infrastructure.Persistence.Repositories;
 using Infrastructure.Settings;
 
 using Microsoft.AspNetCore.Builder;
@@ -25,7 +27,15 @@ public static class RegisterService
 
         services.AddEfContextPool(configuration);
 
-
+        services.AddScoped<IAreaRepository, AreaRepository>();
+        services.AddScoped<ICompanyRepository, CompanyRepository>();
+        services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IStoreRepository, StoreRepository>();
+        services.AddScoped<ITableRepository, TableRepository>();
+        services.AddScoped<ITypeBidaRepository, TypeBidaRepository>();
+        services.AddScoped<ITypeSaleRepository, TypeSaleRepository>();
 
         return services;
     }
