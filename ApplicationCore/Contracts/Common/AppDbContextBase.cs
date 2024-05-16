@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Contracts.Domains;
+using ApplicationCore.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Diagnostics;
@@ -59,7 +60,7 @@ public abstract class AppDbContextBase : DbContext, IDbFacadeContext, IDomainEve
 
     public virtual Task GenerateCode()
     {
-        ChangeTracker.Entries<IContractProcess>()
+        ChangeTracker.Entries<IKiosProcess>()
             .Where(x => x.State is EntityState.Added)
             .ToList()
             .ForEach(item =>

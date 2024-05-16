@@ -1,25 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VELA.WebCoreBase.Core.Entities;
 
-namespace VELA.WebCoreBase.Core.Entities;
-
+namespace ApplicationCore.Entities.Common;
 public abstract class EntityBase : IEntityRoot, ITraceRequest
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; init; }
 
-    [Column(TypeName = "varchar(50)")]
+    [Column(TypeName = "varchar(100)")]
+    public string? Username { get; set; }
+
+    [Column(TypeName = "nvarchar(100)")]
     public string? CreateBy { get; set; }
     public DateTime CreateDate { get; init; } = DateTime.UtcNow;
 
-    [Column(TypeName = "varchar(50)")]
+    [Column(TypeName = "varchar(100)")]
+    public string? UsernameEdit { get; set; }
+
+    [Column(TypeName = "nvarchar(100)")]
     public string? UpdateBy { get; set; }
     public DateTime? UpdateDate { get; set; } = DateTime.UtcNow;
 
     public bool IsPublish { get; set; } = true;
     public bool IsDelete { get; set; } = false;
 
+    [Column(TypeName = "json")]
+    public IList<ActivitiesHistory>? ActivitiesHistory { get; set; }
 
     [NotMapped]
     public List<IDomainEvent> DomainEvents { get; } = new();
@@ -36,8 +44,8 @@ public abstract class EntityBase : IEntityRoot, ITraceRequest
     {
         DomainEvents.Remove(eventItem);
     }
-}
 
+}
 public interface IEntityRoot
 {
 }

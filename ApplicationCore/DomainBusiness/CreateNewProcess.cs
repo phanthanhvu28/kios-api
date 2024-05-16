@@ -6,7 +6,6 @@ using VELA.WebCoreBase.Libraries.Exceptions;
 namespace ApplicationCore.DomainBusiness;
 public class CreateNewProcess : ProcessBase, IWorkflowProcess
 {
-    private readonly string Action = "Create";
 
     public CreateNewProcess(
         IdentityUserObject? identityUser) : base(identityUser)
@@ -18,28 +17,16 @@ public class CreateNewProcess : ProcessBase, IWorkflowProcess
         Constants.Contract.Status.New
     };
 
-    public override OneOf<bool, CommonExceptionBase> Execute(IContractProcess process)
+    public override OneOf<bool, CommonExceptionBase> Execute(IKiosProcess process)
     {
         if (IdentityUser is null || !IdentityUser.IsSubmit)
         {
             return new ForbiddenActionException(100006, "create new");
         }
 
-        if (!ValidStatus.Contains(process.Status))
-        {
-            return new ProcessFlowException(100010, "create new");
-        }
 
         process.CreateBy = IdentityUser!.Name;
-        process.CreateByEmail = IdentityUser.Email;
-
-        process.MyPins = AppendPin(process.MyPins, IdentityUser!.Email);
-
-        process.ChangeStatus(
-            IdentityUser?.Email!,
-            IdentityUser?.Name!,
-            Action,
-            Constants.Contract.Status.New, null);
+        process.GenerateCode();
 
         return true;
     }

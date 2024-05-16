@@ -8,32 +8,16 @@ namespace ApplicationCore.DomainBusiness;
 
 public class RecallProcess : ProcessBase, IWorkflowProcess
 {
-    private static readonly string Action = "Recall";
-    private string Type { get; set; }
-    public RecallProcess(
-        IdentityUserObject? identityUser, string type) : base(identityUser)
+
+    public RecallProcess(IdentityUserObject? identityUser) : base(identityUser)
     {
-        Type = type;
+
     }
 
     public override string[] ValidStatus { get; set; } = { Contract.Status.Waiting };
 
-    public override OneOf<bool, CommonExceptionBase> Execute(IContractProcess process)
+    public override OneOf<bool, CommonExceptionBase> Execute(IKiosProcess process)
     {
-        if (InvalidEmail(process.CreateByEmail!))
-        {
-            return new ForbiddenActionException(100006, "recall");
-        }
-
-        if (!ValidStatus.Contains(process.Status))
-        {
-            return new ProcessFlowException(100028, "Recall", Type, process.Status);
-        }
-
-        process.SubmitBy = IdentityUser!.Name;
-        process.SubmitAt = DateTime.UtcNow;
-
-        process.RollbackStatus(IdentityUser?.Email!, IdentityUser?.Name!, Action);
 
         return true;
     }

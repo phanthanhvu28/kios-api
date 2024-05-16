@@ -26,24 +26,8 @@ public abstract class ProcessBase
     /// </summary>
     /// <param name="process"></param>
     /// <returns></returns>
-    public virtual OneOf<bool, CommonExceptionBase> Execute(IContractProcess process)
+    public virtual OneOf<bool, CommonExceptionBase> Execute(IKiosProcess process)
     {
-        if (!ValidStatus.Contains(process.Status))
-        {
-            return new ProcessFlowException(100010, process.Status);
-        }
-
-        //ProcessFlow? flow = GetProcessFlow(process);
-        //if (InvalidPermission(flow!))
-        //{
-        //    return new ForbiddenActionException(100006, process.Status);
-        //}
-
-
-        if (InvalidEmail(process.CreateByEmail!))
-        {
-            return new ForbiddenActionException(100006, process.Status);
-        }
         return true;
     }
 

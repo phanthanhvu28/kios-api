@@ -1,9 +1,9 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.Contracts.Common;
 using ApplicationCore.Contracts.SpecificationBase;
+using ApplicationCore.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using VELA.WebCoreBase.Core.Entities;
 
 namespace ApplicationCore.Contracts.RepositoryBase;
 

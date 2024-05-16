@@ -29,10 +29,8 @@
 	<ItemGroup>
 	  <Folder Include="Contracts\ServiceBase\" />
 	  <Folder Include="DomainEvents\" />
-	  <Folder Include="DTOs\" />
 	  <Folder Include="Services\Common\" />
 	  <Folder Include="Specifications\" />
-	  <Folder Include="UseCases\" />
 	</ItemGroup>
 
 	<ItemGroup>

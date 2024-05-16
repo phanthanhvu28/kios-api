@@ -1,12 +1,15 @@
-﻿using ApplicationCore.Entities.Common;
+﻿using ApplicationCore.Contracts.Domains;
+using ApplicationCore.Entities.Common;
 using Microsoft.EntityFrameworkCore;
+using OneOf;
 using System.ComponentModel.DataAnnotations.Schema;
+using VELA.WebCoreBase.Libraries.Exceptions;
 
 namespace ApplicationCore.Entities;
 
 [Table("OrderDetails")]
 [Index(nameof(Code), IsUnique = true)]
-public class OrderDetails : EntityBaseCode
+public class OrderDetails : EntityBaseCode, IKiosProcess
 {
     [Column(TypeName = "varchar(50)")]
     public string OrderCode { get; set; }
@@ -20,4 +23,9 @@ public class OrderDetails : EntityBaseCode
     [Column(TypeName = "decimal(9, 2)")]
     public decimal Amount { get; set; }
 
+    public OneOf<bool, CommonExceptionBase> ProcessStep(IWorkflowProcess workflowProcess)
+    {
+        return workflowProcess.Execute(this);
+    }
+    public override string PrefixCode => Constants.Prefix.Area;
 }

@@ -10,41 +10,20 @@ namespace ApplicationCore.DomainBusiness;
 
 public class InactiveProcess : ProcessBase, IWorkflowProcess
 {
-    private const string Action = "Inactive";
-    private bool IsTrigger { get; set; }
-    private string Type { get; set; }
+
     public override string[] ValidStatus { get; set; } = { Contract.Status.Active };
 
-    public InactiveProcess(IdentityUserObject? identityUser, string type, bool isTrigger = false) : base(identityUser)
+    public InactiveProcess(IdentityUserObject? identityUser) : base(identityUser)
     {
-        Type = type;
-        IsTrigger = isTrigger;
+
     }
 
-    public override OneOf<bool, CommonExceptionBase> Execute(IContractProcess process)
+    public override OneOf<bool, CommonExceptionBase> Execute(IKiosProcess process)
     {
         if (IdentityUser is null)
         {
             return new ForbiddenActionException(100006, "Inactive");
         }
-        if (!IsTrigger)
-        {
-            if (!ValidStatus.Contains(process.Status))
-            {
-                return new ValidationException(100028, "Inactive", Type, process.Status);
-            }
-
-            if (!ValidDuration(process.ValidTo.Date))
-            {
-                return new ValidationException(100017, process.ValidTo);
-            }
-        }
-
-        process.ChangeStatus(
-           IdentityUser?.Email!,
-           IdentityUser?.Name!,
-           Action,
-           Constants.Contract.Status.Inactive, null);
 
         return true;
     }
