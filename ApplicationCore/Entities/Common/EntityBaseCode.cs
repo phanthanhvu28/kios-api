@@ -15,9 +15,8 @@ public abstract class EntityBaseCode : EntityBase
     public abstract string PrefixCode { get; }
     public virtual void GenerateCode()
     {
-        string formattedTime = DateTimeExtension.CreateDisplayFormat("Hmmssffffff");
+        string formattedTime = DateTimeExtension.CreateDisplayFormat("hhmmssffffff");
         string digits = $"{PrefixCode}{formattedTime}{StringExtension.RandomDigitsLength(3)}";
-
         GenerateCode(digits);
 
     }

@@ -46,9 +46,11 @@ public class CoreAppContextAccessor : AppContextAccessorBase
         IdentityUser = new
         {
             Email = claims!.GetValueOrDefault(JwtRegisteredClaimNames.Email, default)!,
+            CompanyCode = claims!.GetValueOrDefault(AccessToken.CompanyCode, default)!,
+            StoreCode = claims!.GetValueOrDefault(AccessToken.StoreCode, default)!,
+            Username = claims!.GetValueOrDefault(AccessToken.UserName, default)!,
             Roles = claims!.GetValueOrDefault("role", default)!,
             Name = claims!.GetValueOrDefault(JwtRegisteredClaimNames.Name, default)!,
-            ApprovalLevel = Convert.ToInt32(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.ApprovalLevel, default)),
             IsSubmit = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Submit, default)),
             IsApproval = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Approval, default)),
             IsView = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.View, default))

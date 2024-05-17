@@ -19,7 +19,7 @@ public class SaveSubmitProcess : ProcessBase, IWorkflowProcess
     {
         if (IdentityUser is null || !IdentityUser.IsSubmit)
         {
-            return new ForbiddenActionException(100006, "create new");
+            return new ForbiddenActionException(100003, "create new");
         }
 
         process.CreateBy = IdentityUser!.Name;

@@ -27,6 +27,5 @@ public class Companies : EntityBaseCode, IKiosProcess
     {
         return workflowProcess.Execute(this);
     }
-
     public override string PrefixCode => Constants.Prefix.Company;
 }

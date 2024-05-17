@@ -21,7 +21,7 @@ public class RejectProcess : ProcessBase, IWorkflowProcess
 
         if (IdentityUser is null || !IdentityUser.IsApproval)
         {
-            return new ForbiddenActionException(100006, "reject");
+            return new ForbiddenActionException(100003, "reject");
         }
 
 

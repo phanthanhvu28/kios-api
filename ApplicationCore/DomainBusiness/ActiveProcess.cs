@@ -20,7 +20,7 @@ public class ActiveProcess : ProcessBase, IWorkflowProcess
     {
         if (IdentityUser is null)
         {
-            return new ForbiddenActionException(100006, "active");
+            return new ForbiddenActionException(100003, "active");
         }
 
 

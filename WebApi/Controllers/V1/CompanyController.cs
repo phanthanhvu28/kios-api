@@ -28,4 +28,19 @@ public class CompanyController : AppControllerBase
         ActionResult<ResultModel<CreateCompanyDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
+    /// <summary>
+    /// Update
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// 
+    [HttpPost("update")]
+    public async Task<ActionResult<ResultModel<UpdateCompanyDto>>> Update(
+        [FromBody] UpdateCompany command,
+        CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<UpdateCompanyDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
 }

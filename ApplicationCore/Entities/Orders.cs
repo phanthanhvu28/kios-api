@@ -26,5 +26,5 @@ public class Orders : EntityBaseCode, IKiosProcess
     {
         return workflowProcess.Execute(this);
     }
-    public override string PrefixCode => Constants.Prefix.Area;
+    public override string PrefixCode => Constants.Prefix.Order;
 }

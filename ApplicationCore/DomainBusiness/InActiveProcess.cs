@@ -22,7 +22,7 @@ public class InactiveProcess : ProcessBase, IWorkflowProcess
     {
         if (IdentityUser is null)
         {
-            return new ForbiddenActionException(100006, "Inactive");
+            return new ForbiddenActionException(100003, "Inactive");
         }
 
         return true;

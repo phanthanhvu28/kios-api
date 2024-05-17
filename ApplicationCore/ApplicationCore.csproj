@@ -30,7 +30,6 @@
 	  <Folder Include="Contracts\ServiceBase\" />
 	  <Folder Include="DomainEvents\" />
 	  <Folder Include="Services\Common\" />
-	  <Folder Include="Specifications\" />
 	</ItemGroup>
 
 	<ItemGroup>

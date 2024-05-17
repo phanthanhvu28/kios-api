@@ -27,7 +27,7 @@ public abstract class EntityBase : IEntityRoot, ITraceRequest
     public bool IsDelete { get; set; } = false;
 
     [Column(TypeName = "json")]
-    public IList<ActivitiesHistory>? ActivitiesHistory { get; set; }
+    public IList<ActivitiesHistory> ActivitiesHistory { get; set; } = new List<ActivitiesHistory>();
 
     [NotMapped]
     public List<IDomainEvent> DomainEvents { get; } = new();

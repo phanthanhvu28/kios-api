@@ -21,10 +21,17 @@ public class CreateNewProcess : ProcessBase, IWorkflowProcess
     {
         if (IdentityUser is null || !IdentityUser.IsSubmit)
         {
-            return new ForbiddenActionException(100006, "create new");
+            return new ForbiddenActionException(100003, "create new");
         }
 
-
+        process.ActivitiesHistory.Add(
+            new Entities.Common.ActivitiesHistory
+            {
+                DateAction = DateTime.UtcNow,
+                UserAction = IdentityUser!.Username,
+                Action = "New"
+            });
+        process.Username = IdentityUser!.Username;
         process.CreateBy = IdentityUser!.Name;
         process.GenerateCode();
 

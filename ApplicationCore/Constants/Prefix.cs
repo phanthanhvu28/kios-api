@@ -3,4 +3,12 @@ public struct Prefix
 {
     public const string Company = "CPN";
     public const string Area = "ARE";
+    public const string Store = "STO";
+    public const string Order = "ODR";
+    public const string OrderDetail = "ODD";
+    public const string Product = "PRD";
+    public const string Table = "TAB";
+    public const string TypeBida = "TBD";
+    public const string TypeSale = "TSA";
+
 }
