@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class INITDB : Migration
+    public partial class INITENTITY : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,20 +23,26 @@ namespace Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     StoreCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    StaffCode = table.Column<string>(type: "varchar(50)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "nvarchar(256)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(512)", nullable: true),
                     Email = table.Column<string>(type: "varchar(256)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "varchar(50)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -60,14 +66,18 @@ namespace Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "varchar(50)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -87,19 +97,25 @@ namespace Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     OrderCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    StaffCode = table.Column<string>(type: "varchar(50)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ProductCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -123,15 +139,21 @@ namespace Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     TableCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    StaffCode = table.Column<string>(type: "varchar(50)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     OrderDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -140,6 +162,40 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Staffs",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    StoreCode = table.Column<string>(type: "varchar(50)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FullName = table.Column<string>(type: "nvarchar(250)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(250)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(250)", nullable: true),
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Code = table.Column<string>(type: "varchar(50)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Staffs", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -157,14 +213,18 @@ namespace Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "varchar(50)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -190,20 +250,26 @@ namespace Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     TypeBidaCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    StaffCode = table.Column<string>(type: "varchar(50)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "nvarchar(256)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(512)", nullable: true),
                     Email = table.Column<string>(type: "varchar(256)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "varchar(50)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -224,14 +290,20 @@ namespace Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(256)", nullable: true),
                     StoreCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    StaffCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -252,14 +324,20 @@ namespace Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(256)", nullable: true),
                     StoreCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    StaffCode = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Username = table.Column<string>(type: "varchar(100)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<string>(type: "varchar(50)", nullable: true)
+                    UsernameEdit = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdateBy = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     IsPublish = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActivitiesHistory = table.Column<string>(type: "json", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TraceId = table.Column<string>(type: "varchar(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Code = table.Column<string>(type: "varchar(50)", nullable: true)
@@ -292,6 +370,12 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_Code",
                 table: "Orders",
+                column: "Code",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Staffs_Code",
+                table: "Staffs",
                 column: "Code",
                 unique: true);
 
@@ -334,6 +418,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Staffs");
 
             migrationBuilder.DropTable(
                 name: "Stores");

@@ -10,5 +10,6 @@ public struct Prefix
     public const string Table = "TAB";
     public const string TypeBida = "TBD";
     public const string TypeSale = "TSA";
+    public const string Staff = "STA";
 
 }

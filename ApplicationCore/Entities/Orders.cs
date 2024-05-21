@@ -20,6 +20,9 @@ public class Orders : EntityBaseCode, IKiosProcess
     [Column(TypeName = "varchar(50)")]
     public string TableCode { get; set; }
 
+    [Column(TypeName = "varchar(50)")]
+    public string StaffCode { get; set; }
+
     public DateTime OrderDate { get; set; }
 
     public OneOf<bool, CommonExceptionBase> ProcessStep(IWorkflowProcess workflowProcess)

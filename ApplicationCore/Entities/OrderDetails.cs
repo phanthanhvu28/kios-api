@@ -13,6 +13,10 @@ public class OrderDetails : EntityBaseCode, IKiosProcess
 {
     [Column(TypeName = "varchar(50)")]
     public string OrderCode { get; set; }
+
+    [Column(TypeName = "varchar(50)")]
+    public string StaffCode { get; set; }
+
     [Column(TypeName = "varchar(50)")]
     public string ProductCode { get; set; }
 

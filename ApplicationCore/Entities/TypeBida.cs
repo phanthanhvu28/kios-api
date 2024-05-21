@@ -20,6 +20,9 @@ public class TypeBida : EntityBaseCode, IKiosProcess
     [Column(TypeName = "varchar(50)")]
     public string StoreCode { get; set; }
 
+    [Column(TypeName = "varchar(50)")]
+    public string StaffCode { get; set; }
+
     public OneOf<bool, CommonExceptionBase> ProcessStep(IWorkflowProcess workflowProcess)
     {
         return workflowProcess.Execute(this);

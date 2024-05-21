@@ -23,6 +23,9 @@ public class Tables : EntityBaseCode, IKiosProcess
     [Column(TypeName = "varchar(50)")]
     public string TypeBidaCode { get; set; }
 
+    [Column(TypeName = "varchar(50)")]
+    public string StaffCode { get; set; }
+
     [Column(TypeName = "nvarchar(256)")]
     public string? Name { get; set; }
 

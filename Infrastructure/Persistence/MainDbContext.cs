@@ -19,6 +19,7 @@ public class MainDbContext : AppDbContextBase
     public DbSet<OrderDetails> OrderDetails { get; set; }
     public DbSet<TypeSales> TypeSales { get; set; }
     public DbSet<TypeBida> TypeBida { get; set; }
+    public DbSet<Staffs> Staffs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

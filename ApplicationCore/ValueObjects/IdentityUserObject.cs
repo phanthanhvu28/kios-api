@@ -7,6 +7,7 @@ public record IdentityUserObject
 
     public string Name { get; init; }
     public string CompanyCode { get; init; }
+    public string StaffCode { get; init; }
     public string StoreCode { get; init; }
     public string Username { get; init; }
 

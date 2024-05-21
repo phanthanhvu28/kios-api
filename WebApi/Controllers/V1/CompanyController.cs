@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.DTOs.Company;
 using ApplicationCore.UseCases.Company.Commands;
+using ApplicationCore.UseCases.Company.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 using VELA.WebCoreBase.Core.Controllers;
@@ -42,5 +43,18 @@ public class CompanyController : AppControllerBase
     {
         ActionResult<ResultModel<UpdateCompanyDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
+    }
+    /// <summary>
+    /// List
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<ActionResult<ListResultModel<CompanyBaseDto>>> GetList(
+       [FromBody] GetCompany query,
+       CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
     }
 }

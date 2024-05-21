@@ -29,6 +29,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<string>("Address")
@@ -56,6 +57,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("StaffCode")
+                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("StoreCode")
@@ -92,6 +97,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<string>("Address")
@@ -151,6 +157,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<decimal>("Amount")
@@ -181,6 +188,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("StaffCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("TraceId")
                         .HasColumnType("varchar(100)");
@@ -215,6 +226,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<string>("AreaCode")
@@ -238,6 +250,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("StaffCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("StoreCode")
                         .IsRequired()
@@ -270,6 +286,67 @@ namespace Infrastructure.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("ApplicationCore.Entities.Staffs", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
+                        .HasColumnType("json");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsPublish")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("StoreCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("TraceId")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("UsernameEdit")
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Staffs");
+                });
+
             modelBuilder.Entity("ApplicationCore.Entities.Stores", b =>
                 {
                     b.Property<long>("Id")
@@ -277,6 +354,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<string>("Address")
@@ -340,6 +418,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<string>("Address")
@@ -371,6 +450,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("StaffCode")
+                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("StoreCode")
@@ -415,6 +498,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<string>("Code")
@@ -434,6 +518,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("StaffCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("StoreCode")
                         .IsRequired()
@@ -469,6 +557,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ActivitiesHistory")
+                        .IsRequired()
                         .HasColumnType("json");
 
                     b.Property<string>("Code")
@@ -488,6 +577,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("StaffCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("StoreCode")
                         .IsRequired()

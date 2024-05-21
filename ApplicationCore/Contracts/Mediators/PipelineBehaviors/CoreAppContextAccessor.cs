@@ -47,6 +47,7 @@ public class CoreAppContextAccessor : AppContextAccessorBase
         {
             Email = claims!.GetValueOrDefault(JwtRegisteredClaimNames.Email, default)!,
             CompanyCode = claims!.GetValueOrDefault(AccessToken.CompanyCode, default)!,
+            StaffCode = claims!.GetValueOrDefault(AccessToken.StaffCode, default)!,
             StoreCode = claims!.GetValueOrDefault(AccessToken.StoreCode, default)!,
             Username = claims!.GetValueOrDefault(AccessToken.UserName, default)!,
             Roles = claims!.GetValueOrDefault("role", default)!,
