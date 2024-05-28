@@ -21,9 +21,7 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
 		<PackageReference Include="MySqlConnector" Version="2.3.1" />
 		<PackageReference Include="OneOf" Version="3.0.263" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
-		<PackageReference Include="VELA.Storage.Client" Version="1.0.0" />
-		<!--<PackageReference Include="VELA.WebCoreBase" Version="1.1.2-develop" />-->
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />		
 	</ItemGroup>
 
 	<ItemGroup>

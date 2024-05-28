@@ -2,7 +2,6 @@
 using Mediator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using VELA.Storage.Client;
 using VELA.WebCoreBase.Core.Mediators;
 using VELA.WebCoreBase.Core.PipelineBehaviors;
 
@@ -37,7 +36,7 @@ public static class RegisterService
         //services.AddScoped<IContractAdminSettingService, ContractAdminSettingService>();
 
 
-        services.AddSingleton<IStorageClient, StorageClient>();
+        //services.AddSingleton<IStorageClient, StorageClient>();
 
         return services;
     }

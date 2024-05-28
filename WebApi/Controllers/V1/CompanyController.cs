@@ -57,4 +57,16 @@ public class CompanyController : AppControllerBase
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));
     }
+
+    /// <summary>
+    /// Submit
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+
+    [HttpPost("submit")]
+    public IActionResult Submit(CancellationToken cancellationToken)
+    {
+        return Ok("Ok");
+    }
 }
