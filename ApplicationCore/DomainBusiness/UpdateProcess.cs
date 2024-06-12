@@ -21,7 +21,7 @@ public class UpdateProcess : ProcessBase, IWorkflowProcess
     {
         if (IdentityUser is null)
         {
-            return new ForbiddenActionException(100003, "update");
+            return new ForbiddenActionException(100006, "update");
         }
 
         process.ActivitiesHistory.Add(
