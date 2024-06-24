@@ -36,6 +36,7 @@ public static class RegisterService
         services.AddScoped<ITableRepository, TableRepository>();
         services.AddScoped<ITypeBidaRepository, TypeBidaRepository>();
         services.AddScoped<ITypeSaleRepository, TypeSaleRepository>();
+        services.AddScoped<IAuthenUserRepository, AuthenUserRepository>();
 
         return services;
     }

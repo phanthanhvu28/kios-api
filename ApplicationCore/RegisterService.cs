@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Contracts.Mediators.PipelineBehaviors;
+using ApplicationCore.Services.Common;
 using Mediator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,8 @@ public static class RegisterService
 
 
         //services.AddSingleton<IStorageClient, StorageClient>();
+        services.AddScoped<IAuthenService, AuthenService>();
+
 
         return services;
     }
