@@ -34,7 +34,7 @@ public sealed class CreateUser : CreteUserModel, VELA.WebCoreBase.Core.Mediators
                 return ResultModel<CreateUserDto>.Create(new ValidationException(100036, $"Access deny, you have no permission to create user"));
             }
 
-            AuthenUserByUsernameSpec authenSpec = new(command.Username, command.Password);
+            AuthenUserByUsernameSpec authenSpec = new(command.Username);
             Entities.AuthenUser? user = await _authenRepository.FindOneAsync(authenSpec);
             if (user is not null)
             {

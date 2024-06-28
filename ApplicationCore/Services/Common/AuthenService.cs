@@ -1,4 +1,4 @@
-﻿using ApplicationCore.UseCases.AuthenUser.Models;
+﻿using ApplicationCore.DTOs.AuthenUser;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,84 +10,95 @@ namespace ApplicationCore.Services.Common;
 public class AuthenService : IAuthenService
 {
     private readonly IConfiguration _config;
+
+    private const int Keysize = 256;
+    // This constant determines the number of iterations for the password bytes generation function.
+    private const int DerivationIterations = 1000;
     public AuthenService(IConfiguration config)
     {
         _config = config;
     }
 
-    public string GenerateToken(UserModel user)
+    public string GenerateToken(CreateUserDto user)
     {
         SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
         SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
         Claim[] claims = new[]
         {
-                new Claim("name",user.Username),
-                new Claim("email",user.Username),
+                new Claim("address",user.Address),
+                new Claim("phone",user.Phone),
+                new Claim("email",user.Email),
                 new Claim("username",user.Username),
-                new Claim("fullname",user.Username),
+                new Claim("fullname",user.Fullname),
                 new Claim("role","admin")
             };
         JwtSecurityToken token = new(_config["Jwt:Issuer"],
             _config["Jwt:Audience"],
             claims,
-            expires: DateTime.Now.AddMinutes(15),
+            expires: DateTime.Now.AddMicroseconds(43200),
             signingCredentials: credentials);
 
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
-
     public string Encrypt(string plainText)
     {
+        string privateKey = _config["Authen:Secretkey"]!;
+
+        byte[] iv = new byte[16];
+        byte[] array;
+
         using (Aes aes = Aes.Create())
         {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(_config["Jwt:Key"]!);
-            Array.Resize(ref keyBytes, aes.KeySize / 8);
-            aes.Key = keyBytes;
-            aes.GenerateIV();
+            aes.Key = Encoding.UTF8.GetBytes(privateKey);
+            aes.IV = iv;
 
-            using (ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
-            using (MemoryStream ms = new())
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+            using (MemoryStream memoryStream = new())
             {
-                ms.Write(aes.IV, 0, aes.IV.Length);
-                using (CryptoStream cs = new(ms, encryptor, CryptoStreamMode.Write))
-                using (StreamWriter writer = new(cs))
+                using (CryptoStream cryptoStream = new((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
                 {
-                    writer.Write(plainText);
+                    using (StreamWriter streamWriter = new((Stream)cryptoStream))
+                    {
+                        streamWriter.Write(plainText);
+                    }
+
+                    array = memoryStream.ToArray();
                 }
-                return Convert.ToBase64String(ms.ToArray());
             }
         }
+
+        return Convert.ToBase64String(array);
     }
     public string Decrypt(string cipherText)
     {
-        byte[] fullCipher = Convert.FromBase64String(cipherText);
+        string privateKey = _config["Authen:Secretkey"]!;
+        byte[] iv = new byte[16];
+        byte[] buffer = Convert.FromBase64String(cipherText);
+
         using (Aes aes = Aes.Create())
         {
-            byte[] iv = new byte[aes.BlockSize / 8];
-            byte[] cipher = new byte[fullCipher.Length - iv.Length];
-
-            Array.Copy(fullCipher, iv, iv.Length);
-            Array.Copy(fullCipher, iv.Length, cipher, 0, cipher.Length);
-
-            byte[] keyBytes = Encoding.UTF8.GetBytes(_config["Jwt:Key"]!);
-            Array.Resize(ref keyBytes, aes.KeySize / 8);
-            aes.Key = keyBytes;
+            aes.Key = Encoding.UTF8.GetBytes(privateKey);
             aes.IV = iv;
+            ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-            using (ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV))
-            using (MemoryStream ms = new(cipher))
-            using (CryptoStream cs = new(ms, decryptor, CryptoStreamMode.Read))
-            using (StreamReader reader = new(cs))
+            using (MemoryStream memoryStream = new(buffer))
             {
-                return reader.ReadToEnd();
+                using (CryptoStream cryptoStream = new((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
+                {
+                    using (StreamReader streamReader = new((Stream)cryptoStream))
+                    {
+                        return streamReader.ReadToEnd();
+                    }
+                }
             }
         }
     }
 }
 public interface IAuthenService
 {
-    public string GenerateToken(UserModel user);
+    public string GenerateToken(CreateUserDto user);
     public string Encrypt(string plainText);
     public string Decrypt(string cipherText);
 }

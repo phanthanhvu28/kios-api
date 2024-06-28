@@ -3,9 +3,8 @@
 namespace ApplicationCore.Specifications.AuthenUser;
 public class AuthenUserByUsernameSpec : SpecificationBase<Entities.AuthenUser>
 {
-    public AuthenUserByUsernameSpec(string userName, string password)
+    public AuthenUserByUsernameSpec(string userName)
     {
         ApplyFilter(entity => entity.Username == userName);
-        ApplyFilter(entity => entity.Password == password);
     }
 }
