@@ -25,4 +25,7 @@ public class AuthenUser : EntityBase
 
     [Column(TypeName = "varchar(512)")]
     public string Password { get; set; }
+
+    [Column(TypeName = "json")]
+    public List<AuthenMenu> Menus { get; set; } = new List<AuthenMenu>();
 }

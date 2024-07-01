@@ -2,7 +2,7 @@
 
 public struct Database
 {
-    public const string Name = "MySql:Contract";
+    public const string Name = "MySql:Kios";
     public const string Version = "8.0.29";
 }
 
