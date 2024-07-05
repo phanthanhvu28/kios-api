@@ -39,51 +39,7 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     networks:
-      - contractsupplier-api
-  
-  contractsupplier.webapi.sidecar:
-    image: "daprio/daprd:edge"
-    command:
-      [
-        "./daprd",
-        "--app-id", "contractsupplier-api",
-        "--app-port", "80",
-        "--dapr-http-port", "3500",
-        "--dapr-grpc-port", "5100",
-        "--placement-host-address", "placement:60008",
-        "--components-path", "./components"
-      ]
-    volumes:
-      - "./components/:/components"
-    depends_on:
-      - contractsupplier.webapi
-    network_mode: "service:contractsupplier.webapi"  
-
-  masterdata.api:
-    image: barretbao/master-data-api:dev1-27   
-    ports:
-      - 7119:80
-    environment:
-      PROJECT_NAME: Vela.Api
-      ASPNETCORE_URLS: http://+
-      ConnectionStrings__ConnectionStringMasterData: Server=host.docker.internal;Database=MasterData;User=root;Password=my-secret-pw
-      ConnectionStrings__SeriLog: Server=host.docker.internal;Database=SeriLog;User=root;Password=my-secret-pw
-   
-      
-  masterdata.api-dapr:
-    image: "daprio/daprd:latest"
-    command: [ 
-        "./daprd", 
-        "-app-id", "master-data-api", 
-        "-app-port", "80",
-        "--dapr-http-port", "3500",
-        "--dapr-grpc-port", "5100",
-        "--placement-host-address", "placement:50006"
-    ]
-    depends_on:
-        - placement      
-    network_mode: "service:masterdata.api"
-
+      - contractsupplier-api 
   placement:
     image: "daprio/dapr"
     command: ["./placement", "--port", "50006"]
