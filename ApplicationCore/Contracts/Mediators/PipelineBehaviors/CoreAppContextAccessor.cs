@@ -27,7 +27,10 @@ public class CoreAppContextAccessor : AppContextAccessorBase
 
         authHeader = authHeader.Replace("Bearer ", string.Empty);
 
-        JwtSecurityToken? jwtSecurityToken = JwtSecurityTokenHandler.ReadToken(authHeader) as JwtSecurityToken;
+        JwtSecurityToken? jwtSecurityToken = JwtSecurityTokenHandler.ReadJwtToken(authHeader);
+        string? rawPayload = jwtSecurityToken?.RawPayload;
+
+        IEnumerable<System.Security.Claims.Claim>? cl = jwtSecurityToken?.Claims;
 
         Dictionary<string, string>? claims = jwtSecurityToken?.Claims
             .GroupBy(e => e.Type)
@@ -52,6 +55,7 @@ public class CoreAppContextAccessor : AppContextAccessorBase
             Username = claims!.GetValueOrDefault(AccessToken.UserName, default)!,
             Roles = claims!.GetValueOrDefault("role", default)!,
             Name = claims!.GetValueOrDefault(JwtRegisteredClaimNames.Name, default)!,
+            FullName = claims!.GetValueOrDefault(AccessToken.FullName, default)!,
             IsSubmit = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Submit, default)),
             IsApproval = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Approval, default)),
             IsView = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.View, default))

@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.DTOs.Store;
+using ApplicationCore.UseCases.Store.Commands;
 using ApplicationCore.UseCases.Store.Queries;
 using Microsoft.AspNetCore.Mvc;
 using VELA.WebCoreBase.Core.Controllers;
@@ -27,4 +28,12 @@ public class StoreController : AppControllerBase
         return ResultResponse(await Mediator.Send(query, cancellationToken));
     }
 
+    [HttpPost("create")]
+    public async Task<ActionResult<ResultModel<CreateStoreDto>>> Create(
+      [FromBody] CreateStore command,
+      CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<CreateStoreDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
 }

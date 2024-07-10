@@ -25,7 +25,7 @@ public class SubmitProcess : ProcessBase, IWorkflowProcess
            new Entities.Common.ActivitiesHistory
            {
                DateAction = DateTime.UtcNow,
-               UserAction = IdentityUser!.Name,
+               UserAction = IdentityUser!.Username,
                Action = "Submit"
            });
         return true;

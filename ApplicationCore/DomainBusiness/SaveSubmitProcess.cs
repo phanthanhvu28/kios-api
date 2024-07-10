@@ -22,7 +22,7 @@ public class SaveSubmitProcess : ProcessBase, IWorkflowProcess
             return new ForbiddenActionException(100003, "create new");
         }
 
-        process.CreateBy = IdentityUser!.Name;
+        process.CreateBy = IdentityUser!.Username;
 
         return true;
     }

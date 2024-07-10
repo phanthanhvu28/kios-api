@@ -48,7 +48,7 @@ public sealed class CreateUser : CreteUserModel, VELA.WebCoreBase.Core.Mediators
             @new.Password = enCode;
 
             @new.CreateBy = _identityUser!.Username;
-            @new.CreateBy = _identityUser!.Name;
+            @new.CreateBy = _identityUser!.FullName;
 
             bool result = await _authenRepository.UpdateAsync(@new);
             if (!result)

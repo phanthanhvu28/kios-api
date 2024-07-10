@@ -19,7 +19,7 @@ public class CreateNewProcess : ProcessBase, IWorkflowProcess
 
     public override OneOf<bool, CommonExceptionBase> Execute(IKiosProcess process)
     {
-        if (IdentityUser is null || !IdentityUser.IsSubmit)
+        if (IdentityUser is null)
         {
             return new ForbiddenActionException(100006, "create new");
         }
@@ -32,7 +32,7 @@ public class CreateNewProcess : ProcessBase, IWorkflowProcess
                 Action = "New"
             });
         process.Username = IdentityUser!.Username;
-        process.CreateBy = IdentityUser!.Name;
+        process.CreateBy = IdentityUser!.FullName;
         process.GenerateCode();
 
         return true;

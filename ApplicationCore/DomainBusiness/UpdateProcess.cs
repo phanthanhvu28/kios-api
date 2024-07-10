@@ -33,7 +33,7 @@ public class UpdateProcess : ProcessBase, IWorkflowProcess
            });
 
         process.UsernameEdit = IdentityUser!.Username;
-        process.UpdateBy = IdentityUser!.Name;
+        process.UpdateBy = IdentityUser!.FullName;
 
         return true;
     }

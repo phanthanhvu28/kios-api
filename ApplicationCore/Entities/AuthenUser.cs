@@ -9,6 +9,9 @@ namespace ApplicationCore.Entities;
 public class AuthenUser : EntityBase
 {
     [Column(TypeName = "varchar(256)")]
+    public string? StoreCode { get; set; }
+
+    [Column(TypeName = "varchar(256)")]
     public string Username { get; set; }
 
     [Column(TypeName = "nvarchar(256)")]
