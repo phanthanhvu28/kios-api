@@ -36,4 +36,13 @@ public class StoreController : AppControllerBase
         ActionResult<ResultModel<CreateStoreDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
+
+    [HttpPost("update")]
+    public async Task<ActionResult<ResultModel<UpdateStoreDto>>> Update(
+     [FromBody] UpdateStore command,
+     CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<UpdateStoreDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
 }

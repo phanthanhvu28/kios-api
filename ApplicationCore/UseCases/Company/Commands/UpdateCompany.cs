@@ -28,7 +28,7 @@ public sealed class UpdateCompany : UpdateCompanyModel, VELA.WebCoreBase.Core.Me
             Entities.Companies? company = await _companyRepository.FindOneAsync(companySpec);
             if (company == null)
             {
-                return ResultModel<UpdateCompanyDto>.Create(new NotFoundException(100001, $"company:{command.Code}"));
+                return ResultModel<UpdateCompanyDto>.Create(new NotFoundException(100036, $"Notfound company:{command.Code}"));
             }
 
             OneOf.OneOf<bool, CommonExceptionBase> process = company.ProcessStep(new UpdateProcess(_identityUser));
@@ -45,7 +45,7 @@ public sealed class UpdateCompany : UpdateCompanyModel, VELA.WebCoreBase.Core.Me
             bool result = await _companyRepository.UpdateAsync(company);
             if (!result)
             {
-                return ResultModel<UpdateCompanyDto>.Create(new NotFoundException(100001, $"Update company:{command.Code} error"));
+                return ResultModel<UpdateCompanyDto>.Create(new NotFoundException(100036, $"Update company:{command.Code} error"));
             }
 
             return ResultModel<UpdateCompanyDto>.Create(company.Adapt<UpdateCompanyDto>());
