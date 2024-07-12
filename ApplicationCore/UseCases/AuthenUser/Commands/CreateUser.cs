@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Contracts.RepositoryBase;
+﻿using ApplicationCore.Constants;
+using ApplicationCore.Contracts.RepositoryBase;
 using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.Services.Common;
 using ApplicationCore.Specifications.AuthenUser;
@@ -18,6 +19,7 @@ public sealed class CreateUser : CreteUserModel, VELA.WebCoreBase.Core.Mediators
         private readonly IdentityUserObject? _identityUser;
         private readonly IAuthenUserRepository _authenRepository;
         private readonly IAuthenService _authenService;
+
         public Handler(IAppContextAccessor appContextAccessor,
             IAuthenUserRepository authenRepository,
             IAuthenService authenService)
@@ -50,6 +52,8 @@ public sealed class CreateUser : CreteUserModel, VELA.WebCoreBase.Core.Mediators
             @new.CreateBy = _identityUser!.Username;
             @new.CreateBy = _identityUser!.FullName;
 
+            @new.Menus = AuthenSite.Site._menus;
+
             bool result = await _authenRepository.UpdateAsync(@new);
             if (!result)
             {
@@ -60,6 +64,5 @@ public sealed class CreateUser : CreteUserModel, VELA.WebCoreBase.Core.Mediators
 
             return ResultModel<CreateUserDto>.Create(dto);
         }
-
     }
 }

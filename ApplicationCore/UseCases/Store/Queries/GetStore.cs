@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.RepositoryBase;
 using ApplicationCore.DTOs.Store;
+using ApplicationCore.Specifications.Company;
 using ApplicationCore.Specifications.Store;
 using ApplicationCore.ValueObjects;
 using Mapster;
@@ -14,21 +15,39 @@ public class GetStore : PagingModel, IListQuery<StoreBaseDto>
     public sealed class Handler : IQueryHandler<GetStore, ListResultModel<StoreBaseDto>>
     {
         private readonly IStoreRepository _storeRepository;
+        private readonly ICompanyRepository _companyRepository;
         private readonly IdentityUserObject? _identityUser;
 
-        public Handler(IStoreRepository storeRepository,
+        public Handler(
+            IStoreRepository storeRepository,
+            ICompanyRepository companyRepository,
            IAppContextAccessor appContextAccessor)
         {
             _storeRepository = storeRepository;
+            _companyRepository = companyRepository;
             _identityUser = appContextAccessor.IdentityUser?.Adapt<IdentityUserObject>();
         }
         public async ValueTask<ListResultModel<StoreBaseDto>> Handle(GetStore query, CancellationToken cancellationToken)
         {
             StoreByFilterSpec spec = new(query.Filters, query.Sorts, query.Page, query.PageSize);
             List<Entities.Stores> entity = await _storeRepository.FindAsync(spec);
+            List<StoreBaseDto> result = entity.Adapt<List<StoreBaseDto>>();
+
+            CompanyByArrayCodeSpec companySpec = new(entity.Select(e => e.CompanyCode).ToArray());
+            List<Entities.Companies> companies = await _companyRepository.FindAsync(companySpec);
+
+            Dictionary<string, string> companyDictionary = companies.ToDictionary(c => c.Code, c => c.Name);
+
+            result.ForEach(storeDto =>
+            {
+                if (companyDictionary.TryGetValue(storeDto.CompanyCode, out string? companyName))
+                {
+                    storeDto.CompanyName = companyName;
+                }
+            });
+
             long entityCount = await _storeRepository.CountAsync(spec);
-            return ListResultModel<StoreBaseDto>.Create(
-                 entity.Adapt<List<StoreBaseDto>>(), entityCount, query.Page, query.PageSize);
+            return ListResultModel<StoreBaseDto>.Create(result, entityCount, query.Page, query.PageSize);
         }
     }
 }

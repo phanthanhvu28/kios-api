@@ -51,14 +51,15 @@ public class CoreAppContextAccessor : AppContextAccessorBase
             Email = claims!.GetValueOrDefault(JwtRegisteredClaimNames.Email, default)!,
             CompanyCode = claims!.GetValueOrDefault(AccessToken.CompanyCode, default)!,
             StaffCode = claims!.GetValueOrDefault(AccessToken.StaffCode, default)!,
-            StoreCode = claims!.GetValueOrDefault(AccessToken.StoreCode, default)!,
             Username = claims!.GetValueOrDefault(AccessToken.UserName, default)!,
             Roles = claims!.GetValueOrDefault("role", default)!,
-            Name = claims!.GetValueOrDefault(JwtRegisteredClaimNames.Name, default)!,
+            //Name = claims!.GetValueOrDefault(JwtRegisteredClaimNames.Name, default)!,
             FullName = claims!.GetValueOrDefault(AccessToken.FullName, default)!,
-            IsSubmit = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Submit, default)),
-            IsApproval = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Approval, default)),
-            IsView = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.View, default))
+            Menus = claims!.GetValueOrDefault(AccessToken.Menus, default)!,
+            StoreCode = claims!.GetValueOrDefault(AccessToken.StoreCode, default)!,
+            //IsSubmit = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Submit, default)),
+            //IsApproval = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.Approval, default)),
+            //IsView = Convert.ToBoolean(claims!.GetValueOrDefault(ProcessFlow.PermissionClaim.View, default))
         };
 
     }

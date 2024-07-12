@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.DTOs.AuthenUser;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -30,7 +31,9 @@ public class AuthenService : IAuthenService
                 new Claim("email",user.Email),
                 new Claim("username",user.Username),
                 new Claim("fullname",user.Fullname),
-                new Claim("role","admin")
+                new Claim("role","admin"),
+                new Claim("menus", JsonConvert.SerializeObject(user.Menus)),
+                new Claim("storecode","123456789"),
             };
         JwtSecurityToken token = new(_config["Jwt:Issuer"],
             _config["Jwt:Audience"],

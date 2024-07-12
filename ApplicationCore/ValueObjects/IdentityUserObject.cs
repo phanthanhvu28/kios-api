@@ -10,6 +10,7 @@ public record IdentityUserObject
     public string StaffCode { get; init; }
     public string StoreCode { get; init; }
     public string Username { get; init; }
+    public string Menus { get; init; }
 
     public int ApprovalLevel { get; set; }
     public bool IsSubmit { get; set; }
