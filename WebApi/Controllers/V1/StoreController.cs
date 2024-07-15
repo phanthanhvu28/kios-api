@@ -45,4 +45,13 @@ public class StoreController : AppControllerBase
         ActionResult<ResultModel<UpdateStoreDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
+
+    [HttpPost("delete")]
+    public async Task<ActionResult<ResultModel<string>>> Delete(
+     [FromBody] DeleteStore command,
+     CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<string>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
 }

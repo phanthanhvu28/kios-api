@@ -1,4 +1,6 @@
-﻿using ApplicationCore.DTOs.Company;
+﻿using ApplicationCore.DTOs.AuthenUser;
+using ApplicationCore.DTOs.Company;
+using ApplicationCore.UseCases.AuthenUser.Queries;
 using ApplicationCore.UseCases.Company.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +26,20 @@ public class FilterController : AppControllerBase
     [HttpPost("company")]
     public async Task<ActionResult<ResultModel<FilterCompanyDto>>> FilterCompany(
        [FromBody] FilterCompany query,
+       CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
+    }
+
+    /// <summary>
+    /// Filter User
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("user")]
+    public async Task<ActionResult<ResultModel<FilterUserDto>>> FilterUser(
+       [FromBody] FilterUser query,
        CancellationToken cancellationToken)
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));

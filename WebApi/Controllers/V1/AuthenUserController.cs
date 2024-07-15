@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.UseCases.AuthenUser.Commands;
+using ApplicationCore.UseCases.AuthenUser.Queries;
 using Microsoft.AspNetCore.Mvc;
 using VELA.WebCoreBase.Core.Controllers;
 using VELA.WebCoreBase.Core.Models;
@@ -40,5 +41,34 @@ public class AuthenUserController : AppControllerBase
     {
         ActionResult<ResultModel<CreateUserDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
+    }
+
+    /// <summary>
+    /// Update user
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("update")]
+    public async Task<ActionResult<ResultModel<UpdateUserDto>>> Update(
+       [FromBody] UpdateUser command,
+       CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<UpdateUserDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
+
+    /// <summary>
+    /// Get List
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("user")]
+    public async Task<ActionResult<ListResultModel<UserBaseDto>>> GetList(
+       [FromBody] GetUser query,
+       CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
     }
 }

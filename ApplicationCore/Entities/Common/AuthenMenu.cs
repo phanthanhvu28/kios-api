@@ -15,3 +15,12 @@ public sealed record Feature
     public string FeatureCode { get; set; }//V,A,E,D
     public string FeatureName { get; set; }//View, Add, Edit, Delete
 }
+
+/// <summary>
+/// Chưa cần làm
+/// </summary>
+public sealed record MenuApi
+{
+    public string ApiCode { get; set; }//KiosApi
+    public string ApiName { get; set; }//Kios
+}

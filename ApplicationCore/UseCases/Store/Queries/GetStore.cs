@@ -38,11 +38,15 @@ public class GetStore : PagingModel, IListQuery<StoreBaseDto>
 
             Dictionary<string, string> companyDictionary = companies.ToDictionary(c => c.Code, c => c.Name);
 
-            result.ForEach(storeDto =>
+            result.ForEach(companyDto =>
             {
-                if (companyDictionary.TryGetValue(storeDto.CompanyCode, out string? companyName))
+                if (companyDictionary.TryGetValue(companyDto.CompanyCode, out string? companyName))
                 {
-                    storeDto.CompanyName = companyName;
+                    companyDto.CompanyName = companyName;
+                }
+                else
+                {
+                    companyDto.CompanyName = "";
                 }
             });
 
