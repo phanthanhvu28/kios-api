@@ -29,6 +29,20 @@ public class AuthenUserController : AppControllerBase
         return response;
     }
     /// <summary>
+    /// Reset Password
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("reset-password")]
+    public async Task<ActionResult<ResultModel<bool>>> ResetPassword(
+       [FromBody] ResetPassword command,
+       CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<bool>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
+    /// <summary>
     /// Create user
     /// </summary>
     /// <param name="command"></param>
@@ -55,6 +69,20 @@ public class AuthenUserController : AppControllerBase
        CancellationToken cancellationToken)
     {
         ActionResult<ResultModel<UpdateUserDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
+    /// <summary>
+    /// Delete user
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpDelete("delete")]
+    public async Task<ActionResult<ResultModel<string>>> Delete(
+     [FromBody] DeleteUser command,
+     CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<string>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
 

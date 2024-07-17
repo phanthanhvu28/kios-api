@@ -43,12 +43,13 @@ public sealed class CreateUser : CreteUserModel, VELA.WebCoreBase.Core.Mediators
                 return ResultModel<CreateUserDto>.Create(new ValidationException(100036, $"Exists {command.Username} in system"));
             }
 
-            string enCode = _authenService.Encrypt(command.Password);
+            //string enCode = _authenService.Encrypt(command.Password);
 
             Entities.AuthenUser @new = command.Adapt<Entities.AuthenUser>();
 
-            @new.Password = enCode;
+            //@new.Password = enCode;
 
+            @new.StoreCode = command.StoreCode;
             @new.CreateBy = _identityUser!.Username;
             @new.CreateBy = _identityUser!.FullName;
 

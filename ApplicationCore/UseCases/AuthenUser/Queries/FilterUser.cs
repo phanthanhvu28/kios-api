@@ -1,7 +1,7 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.Contracts.RepositoryBase;
 using ApplicationCore.DTOs.AuthenUser;
-using ApplicationCore.Specifications.Company;
+using ApplicationCore.Specifications.Store;
 using ApplicationCore.ValueObjects;
 using Mapster;
 using Mediator;
@@ -14,22 +14,22 @@ public class FilterUser : IItemQuery<FilterUserDto>
 {
     public sealed class Handler : IQueryHandler<FilterUser, ResultModel<FilterUserDto>>
     {
-        private readonly ICompanyRepository _companyRepository;
+        private readonly IStoreRepository _storeRepository;
         private readonly IdentityUserObject? _identityUser;
 
-        public Handler(ICompanyRepository companyRepository,
+        public Handler(IStoreRepository storeRepository,
            IAppContextAccessor appContextAccessor)
         {
-            _companyRepository = companyRepository;
+            _storeRepository = storeRepository;
             _identityUser = appContextAccessor.IdentityUser?.Adapt<IdentityUserObject>();
         }
         public async ValueTask<ResultModel<FilterUserDto>> Handle(FilterUser query, CancellationToken cancellationToken)
         {
             FilterUserDto result = new();
-            CompanyGetFilterSpec spec = new();
-            List<Entities.Companies> company = await _companyRepository.FindAsync(spec);
+            StoreGetFilterSpec spec = new();
+            List<Entities.Stores> store = await _storeRepository.FindAsync(spec);
 
-            result.Store = company.Select(e => new ValueFilterObject { Value = new { e.Code, e.Name }, Label = e.Name }).ToList();
+            result.Store = store.Select(e => new ValueFilterObject { Value = new { e.Code, e.Name }, Label = e.Name }).ToList();
             result.Menus = AuthenSite.Site._menus;
 
             return ResultModel<FilterUserDto>.Create(result);
