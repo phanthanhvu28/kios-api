@@ -9,102 +9,152 @@ public struct AuthenSite
         {
             new AuthenMenu()
             {
-                SiteCode="Company",
-                SiteName="Company",
-                Feature = new List<Feature>()
+                ApiCode="Kios",
+                ApiName="Kios",
+                Sites = new List<MenuSite>()
                 {
-                    new Feature()
+                    new MenuSite()
                     {
-                        FeatureCode="View",
-                        FeatureName="View"
+                        SiteCode="Company",
+                        SiteName="Company",
+                        Feature = new List<Feature>()
+                        {
+                            new Feature()
+                            {
+                                FeatureCode="View",
+                                FeatureName="View"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Add",
+                                FeatureName="Add"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Edit",
+                                FeatureName="Edit"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Del",
+                                FeatureName="Del"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Export",
+                                FeatureName="Export"
+                            }
+                        }
                     },
-                    new Feature()
+                    new MenuSite()
                     {
-                        FeatureCode="Add",
-                        FeatureName="Add"
+                        SiteCode="Store",
+                        SiteName="Store",
+                        Feature = new List<Feature>()
+                        {
+                            new Feature()
+                            {
+                                FeatureCode="View",
+                                FeatureName="View"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Add",
+                                FeatureName="Add"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Edit",
+                                FeatureName="Edit"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Del",
+                                FeatureName="Del"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Export",
+                                FeatureName="Export"
+                            }
+                        }
                     },
-                    new Feature()
+                    new MenuSite()
                     {
-                        FeatureCode="Edit",
-                        FeatureName="Edit"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Del",
-                        FeatureName="Del"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Export",
-                        FeatureName="Export"
+                        SiteCode="User",
+                        SiteName="User",
+                        Feature = new List<Feature>()
+                        {
+                            new Feature()
+                            {
+                                FeatureCode="View",
+                                FeatureName="View"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Add",
+                                FeatureName="Add"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Edit",
+                                FeatureName="Edit"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Del",
+                                FeatureName="Del"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Export",
+                                FeatureName="Export"
+                            }
+                        }
                     }
                 }
             },
             new AuthenMenu()
             {
-                SiteCode="Store",
-                SiteName="Store",
-                Feature = new List<Feature>()
+                ApiCode="shop",
+                ApiName="shop",
+                Sites = new List<MenuSite>()
                 {
-                    new Feature()
+                    new MenuSite()
                     {
-                        FeatureCode="View",
-                        FeatureName="View"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Add",
-                        FeatureName="Add"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Edit",
-                        FeatureName="Edit"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Del",
-                        FeatureName="Del"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Export",
-                        FeatureName="Export"
+                        SiteCode="SHop1",
+                        SiteName="SHop1",
+                        Feature = new List<Feature>()
+                        {
+                            new Feature()
+                            {
+                                FeatureCode="View",
+                                FeatureName="View"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Add",
+                                FeatureName="Add"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Edit",
+                                FeatureName="Edit"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Del",
+                                FeatureName="Del"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Export",
+                                FeatureName="Export"
+                            }
+                        }
                     }
                 }
-            },
-            new AuthenMenu()
-            {
-                SiteCode="User",
-                SiteName="User",
-                Feature = new List<Feature>()
-                {
-                    new Feature()
-                    {
-                        FeatureCode="View",
-                        FeatureName="View"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Add",
-                        FeatureName="Add"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Edit",
-                        FeatureName="Edit"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Del",
-                        FeatureName="Del"
-                    },
-                    new Feature()
-                    {
-                        FeatureCode="Export",
-                        FeatureName="Export"
-                    }
-                }
+
             }
         };
     }
