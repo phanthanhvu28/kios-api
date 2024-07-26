@@ -1,5 +1,4 @@
-﻿using ApplicationCore.Constants;
-using ApplicationCore.Contracts.RepositoryBase;
+﻿using ApplicationCore.Contracts.RepositoryBase;
 using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.Services.Common;
 using ApplicationCore.Specifications.AuthenUser;
@@ -50,7 +49,7 @@ public sealed class UpdateUser : UpdateUserModel, VELA.WebCoreBase.Core.Mediator
             user.UpdateBy = _identityUser!.FullName;
             user.UsernameEdit = _identityUser!.Username;
 
-            user.Menus = AuthenSite.Site._menus;
+            user.Menus = command.Menus;
 
             bool result = await _authenRepository.UpdateAsync(user);
             if (!result)
