@@ -11,9 +11,9 @@ using VELA.WebCoreBase.Core.PipelineBehaviors;
 using VELA.WebCoreBase.Libraries.Exceptions;
 
 namespace ApplicationCore.UseCases.AuthenUser.Commands;
-public sealed class UpdateUser : UpdateUserModel, VELA.WebCoreBase.Core.Mediators.ICommand<UpdateUserDto>
+public sealed class UpdateMenu : UpdateMenuModel, VELA.WebCoreBase.Core.Mediators.ICommand<UpdateMenuDto>
 {
-    public sealed class Handler : ICommandHandler<UpdateUser, ResultModel<UpdateUserDto>>
+    public sealed class Handler : ICommandHandler<UpdateMenu, ResultModel<UpdateMenuDto>>
     {
         private readonly IdentityUserObject? _identityUser;
         private readonly IAuthenUserRepository _authenRepository;
@@ -28,39 +28,34 @@ public sealed class UpdateUser : UpdateUserModel, VELA.WebCoreBase.Core.Mediator
             _authenService = authenService;
 
         }
-        public async ValueTask<ResultModel<UpdateUserDto>> Handle(UpdateUser command, CancellationToken cancellationToken)
+        public async ValueTask<ResultModel<UpdateMenuDto>> Handle(UpdateMenu command, CancellationToken cancellationToken)
         {
             if (_identityUser is null)
             {
-                return ResultModel<UpdateUserDto>.Create(new ValidationException(100036, $"Access deny, you have no permission to update user"));
+                return ResultModel<UpdateMenuDto>.Create(new ValidationException(100036, $"Access deny, you have no permission to update menu"));
             }
 
             AuthenUserByUsernameSpec authenSpec = new(command.Username);
             Entities.AuthenUser? user = await _authenRepository.FindOneAsync(authenSpec);
             if (user is null)
             {
-                return ResultModel<UpdateUserDto>.Create(new NotFoundException(100036, $"Notfound user:{command.Username} in system"));
+                return ResultModel<UpdateMenuDto>.Create(new NotFoundException(100036, $"Notfound user:{command.Username} in system"));
             }
-            user.Fullname = command.Fullname;
-            user.Email = command.Email;
-            user.Address = command.Address;
-            user.Phone = command.Phone;
-            user.StoreCode = command.StoreCode;
 
             user.UpdateBy = _identityUser!.FullName;
             user.UsernameEdit = _identityUser!.Username;
 
-            //user.Menus = command.Menus;
+            user.Menus = command.Menus;
 
             bool result = await _authenRepository.UpdateAsync(user);
             if (!result)
             {
-                return ResultModel<UpdateUserDto>.Create(new ValidationException(100036, $"Update {command.Username} error"));
+                return ResultModel<UpdateMenuDto>.Create(new ValidationException(100036, $"Update menu for {command.Username} error"));
             }
 
-            UpdateUserDto dto = user.Adapt<UpdateUserDto>();
+            UpdateMenuDto dto = user.Adapt<UpdateMenuDto>();
 
-            return ResultModel<UpdateUserDto>.Create(dto);
+            return ResultModel<UpdateMenuDto>.Create(dto);
         }
     }
 }

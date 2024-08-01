@@ -1,6 +1,4 @@
-﻿using ApplicationCore.Entities.Common;
-
-namespace ApplicationCore.UseCases.AuthenUser.Models;
+﻿namespace ApplicationCore.UseCases.AuthenUser.Models;
 public class UpdateUserModel
 {
     public string Username { get; set; }
@@ -8,5 +6,5 @@ public class UpdateUserModel
     public string Email { get; set; }
     public string Address { get; set; }
     public string Phone { get; set; }
-    public List<AuthenMenu> Menus { get; set; } = new List<AuthenMenu>();
+    public string StoreCode { get; set; }
 }

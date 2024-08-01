@@ -71,6 +71,15 @@ public class AuthenUserController : AppControllerBase
         ActionResult<ResultModel<UpdateUserDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
+
+    [HttpPost("menu/update")]
+    public async Task<ActionResult<ResultModel<UpdateMenuDto>>> MenuUpdate(
+      [FromBody] UpdateMenu command,
+      CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<UpdateMenuDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
     /// <summary>
     /// Delete user
     /// </summary>
