@@ -33,6 +33,7 @@ public static class RegisterService
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IStoreRepository, StoreRepository>();
+        services.AddScoped<IStaffRepository, StaffRepository>();
         services.AddScoped<ITableRepository, TableRepository>();
         services.AddScoped<ITypeBidaRepository, TypeBidaRepository>();
         services.AddScoped<ITypeSaleRepository, TypeSaleRepository>();
