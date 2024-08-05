@@ -40,7 +40,7 @@ public class UpdateStaff : UpdateStaffModel, VELA.WebCoreBase.Core.Mediators.ICo
             staff.FullName = command.FullName;
             staff.Address = command.Address;
             staff.Email = command.Email;
-            //staff.Ph = command.Phone;
+            staff.Phone = command.Phone;
             staff.StoreCode = command.StoreCode;
 
             bool result = await _staffRepository.UpdateAsync(staff);

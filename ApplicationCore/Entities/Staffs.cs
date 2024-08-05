@@ -24,6 +24,9 @@ public class Staffs : EntityBaseCode, IKiosProcess
     [Column(TypeName = "nvarchar(250)")]
     public string? Address { get; set; }
 
+    [Column(TypeName = "varchar(256)")]
+    public string? Phone { get; set; }
+
     public OneOf<bool, CommonExceptionBase> ProcessStep(IWorkflowProcess workflowProcess)
     {
         return workflowProcess.Execute(this);

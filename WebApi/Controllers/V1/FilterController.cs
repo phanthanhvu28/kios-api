@@ -1,7 +1,9 @@
 ﻿using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.DTOs.Company;
+using ApplicationCore.DTOs.Staff;
 using ApplicationCore.UseCases.AuthenUser.Queries;
 using ApplicationCore.UseCases.Company.Queries;
+using ApplicationCore.UseCases.Staff.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 using VELA.WebCoreBase.Core.Controllers;
@@ -44,5 +46,20 @@ public class FilterController : AppControllerBase
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));
     }
+
+    /// <summary>
+    /// Filter Staff
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("staff")]
+    public async Task<ActionResult<ResultModel<FilterStaffDto>>> FilterStaff(
+       [FromBody] FilterStaff query,
+       CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
+    }
+
 
 }
