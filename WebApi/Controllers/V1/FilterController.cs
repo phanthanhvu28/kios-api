@@ -1,6 +1,8 @@
-﻿using ApplicationCore.DTOs.AuthenUser;
+﻿using ApplicationCore.DTOs.Area;
+using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.DTOs.Company;
 using ApplicationCore.DTOs.Staff;
+using ApplicationCore.UseCases.Area.Queries;
 using ApplicationCore.UseCases.AuthenUser.Queries;
 using ApplicationCore.UseCases.Company.Queries;
 using ApplicationCore.UseCases.Staff.Queries;
@@ -57,6 +59,20 @@ public class FilterController : AppControllerBase
     public async Task<ActionResult<ResultModel<FilterStaffDto>>> FilterStaff(
        [FromBody] FilterStaff query,
        CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
+    }
+
+    /// <summary>
+    /// Filter Area
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("area")]
+    public async Task<ActionResult<ResultModel<FilterAreaDto>>> FilterArea(
+      [FromBody] FilterArea query,
+      CancellationToken cancellationToken)
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));
     }
