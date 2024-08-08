@@ -2,10 +2,12 @@
 using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.DTOs.Company;
 using ApplicationCore.DTOs.Staff;
+using ApplicationCore.DTOs.Table;
 using ApplicationCore.UseCases.Area.Queries;
 using ApplicationCore.UseCases.AuthenUser.Queries;
 using ApplicationCore.UseCases.Company.Queries;
 using ApplicationCore.UseCases.Staff.Queries;
+using ApplicationCore.UseCases.Table.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 using VELA.WebCoreBase.Core.Controllers;
@@ -72,6 +74,20 @@ public class FilterController : AppControllerBase
     [HttpPost("area")]
     public async Task<ActionResult<ResultModel<FilterAreaDto>>> FilterArea(
       [FromBody] FilterArea query,
+      CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
+    }
+
+    /// <summary>
+    /// Table
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("table")]
+    public async Task<ActionResult<ResultModel<FilterTableDto>>> FilterTable(
+      [FromBody] FilterTable query,
       CancellationToken cancellationToken)
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));

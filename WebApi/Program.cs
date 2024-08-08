@@ -173,6 +173,8 @@ app.UseCloudEvents();
 
 app.MigrationDatabase();
 
+app.DatabaseSeedings();
+
 //app.UseAuthorization();
 
 app.MapHealthCheck();

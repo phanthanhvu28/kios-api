@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Contracts.RepositoryBase;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
+using Infrastructure.Seeds;
 using Infrastructure.Settings;
 
 using Microsoft.AspNetCore.Builder;
@@ -88,6 +89,11 @@ public static class RegisterService
                           exception);
         }
 
+        return builder;
+    }
+    public static WebApplication DatabaseSeedings(this WebApplication builder)
+    {
+        DataSeeding.Run(builder.Services);
         return builder;
     }
 }
