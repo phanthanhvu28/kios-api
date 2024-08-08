@@ -3,6 +3,8 @@ using ApplicationCore.DTOs.Table;
 using ApplicationCore.Specifications.Area;
 using ApplicationCore.Specifications.Store;
 using ApplicationCore.Specifications.Table;
+using ApplicationCore.Specifications.TypeBida;
+using ApplicationCore.Specifications.TypeSale;
 using ApplicationCore.ValueObjects;
 using Mapster;
 using Mediator;
@@ -18,17 +20,23 @@ public class GetTable : PagingModel, IListQuery<TableBaseDto>
         private readonly ITableRepository _tableRepository;
         private readonly IAreaRepository _areaRepository;
         private readonly IStoreRepository _storeRepository;
+        private readonly ITypeSaleRepository _typeSaleRepository;
+        private readonly ITypeBidaRepository _typeBidaRepository;
         private readonly IdentityUserObject? _identityUser;
 
         public Handler(
             ITableRepository tableRepository,
             IAreaRepository areaRepository,
             IStoreRepository storeRepository,
+            ITypeSaleRepository typeSaleRepository,
+            ITypeBidaRepository typeBidaRepository,
             IAppContextAccessor appContextAccessor)
         {
             _tableRepository = tableRepository;
             _areaRepository = areaRepository;
             _storeRepository = storeRepository;
+            _typeSaleRepository = typeSaleRepository;
+            _typeBidaRepository = typeBidaRepository;
             _identityUser = appContextAccessor.IdentityUser?.Adapt<IdentityUserObject>();
         }
         public async ValueTask<ListResultModel<TableBaseDto>> Handle(GetTable query, CancellationToken cancellationToken)
@@ -68,6 +76,40 @@ public class GetTable : PagingModel, IListQuery<TableBaseDto>
                 else
                 {
                     areaDto.AreaName = "";
+                }
+            });
+
+            TypeBidaByArrayCodeSpec typeBidaSpec = new(entity.Select(e => e.TypeBidaCode).ToArray());
+            List<Entities.TypeBida> typeBida = await _typeBidaRepository.FindAsync(typeBidaSpec);
+
+            Dictionary<string, string> typeBidaDictionary = typeBida.ToDictionary(c => c.Code, c => c.Name);
+
+            result.ForEach(typeBidaDto =>
+            {
+                if (typeBidaDictionary.TryGetValue(typeBidaDto.TypeBidaCode, out string? typeBidaName))
+                {
+                    typeBidaDto.TypeBidaName = typeBidaName;
+                }
+                else
+                {
+                    typeBidaDto.TypeBidaName = "";
+                }
+            });
+
+            TypeSaleByArrayCodeSpec typeSaleSpec = new(entity.Select(e => e.TypeSaleCode).ToArray());
+            List<Entities.TypeSales> typeSale = await _typeSaleRepository.FindAsync(typeSaleSpec);
+
+            Dictionary<string, string> typeSaleDictionary = typeSale.ToDictionary(c => c.Code, c => c.Name);
+
+            result.ForEach(typeSaleDto =>
+            {
+                if (typeSaleDictionary.TryGetValue(typeSaleDto.TypeSaleCode, out string? typeSaleName))
+                {
+                    typeSaleDto.TypeSaleName = typeSaleName;
+                }
+                else
+                {
+                    typeSaleDto.TypeSaleName = "";
                 }
             });
 

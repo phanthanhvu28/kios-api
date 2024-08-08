@@ -1,7 +1,6 @@
 ﻿using ApplicationCore.Contracts.RepositoryBase;
 using ApplicationCore.DomainBusiness;
 using ApplicationCore.Specifications.Table;
-using ApplicationCore.UseCases.Area.Commands;
 using ApplicationCore.ValueObjects;
 using Mapster;
 using Mediator;
@@ -13,7 +12,7 @@ namespace ApplicationCore.UseCases.Table.Commands;
 public class DeleteTable : VELA.WebCoreBase.Core.Mediators.ICommand<string>
 {
     public string Code { get; set; }
-    public sealed class Handler : ICommandHandler<DeleteArea, ResultModel<string>>
+    public sealed class Handler : ICommandHandler<DeleteTable, ResultModel<string>>
     {
         private readonly IdentityUserObject? _identityUser;
         private readonly ITableRepository _tableRepository;
@@ -22,7 +21,7 @@ public class DeleteTable : VELA.WebCoreBase.Core.Mediators.ICommand<string>
             _identityUser = appContextAccessor.IdentityUser?.Adapt<IdentityUserObject>();
             _tableRepository = tableRepository;
         }
-        public async ValueTask<ResultModel<string>> Handle(DeleteArea command, CancellationToken cancellationToken)
+        public async ValueTask<ResultModel<string>> Handle(DeleteTable command, CancellationToken cancellationToken)
         {
             TableByCodeSpec tableSpec = new(command.Code);
             Entities.Tables? table = await _tableRepository.FindOneAsync(tableSpec);
