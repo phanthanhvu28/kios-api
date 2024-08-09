@@ -3,12 +3,14 @@ using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.DTOs.Company;
 using ApplicationCore.DTOs.Staff;
 using ApplicationCore.DTOs.Table;
+using ApplicationCore.DTOs.TypeBida;
 using ApplicationCore.DTOs.TypeSale;
 using ApplicationCore.UseCases.Area.Queries;
 using ApplicationCore.UseCases.AuthenUser.Queries;
 using ApplicationCore.UseCases.Company.Queries;
 using ApplicationCore.UseCases.Staff.Queries;
 using ApplicationCore.UseCases.Table.Queries;
+using ApplicationCore.UseCases.TypeBida.Queries;
 using ApplicationCore.UseCases.TypeSale.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -103,6 +105,20 @@ public class FilterController : AppControllerBase
     [HttpPost("type-sale")]
     public async Task<ActionResult<ResultModel<FilterTypeSaleDto>>> FilterTypeSale(
       [FromBody] FilterTypeSale query,
+      CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
+    }
+
+    /// <summary>
+    /// Type bida
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("type-bida")]
+    public async Task<ActionResult<ResultModel<FilterTypeBidaDto>>> FilterTypeBida(
+      [FromBody] FilterTypeBida query,
       CancellationToken cancellationToken)
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));
