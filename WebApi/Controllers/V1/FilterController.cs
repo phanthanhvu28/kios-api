@@ -3,11 +3,13 @@ using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.DTOs.Company;
 using ApplicationCore.DTOs.Staff;
 using ApplicationCore.DTOs.Table;
+using ApplicationCore.DTOs.TypeSale;
 using ApplicationCore.UseCases.Area.Queries;
 using ApplicationCore.UseCases.AuthenUser.Queries;
 using ApplicationCore.UseCases.Company.Queries;
 using ApplicationCore.UseCases.Staff.Queries;
 using ApplicationCore.UseCases.Table.Queries;
+using ApplicationCore.UseCases.TypeSale.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 using VELA.WebCoreBase.Core.Controllers;
@@ -88,6 +90,19 @@ public class FilterController : AppControllerBase
     [HttpPost("table")]
     public async Task<ActionResult<ResultModel<FilterTableDto>>> FilterTable(
       [FromBody] FilterTable query,
+      CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
+    }
+    /// <summary>
+    /// Type sale
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("type-sale")]
+    public async Task<ActionResult<ResultModel<FilterTypeSaleDto>>> FilterTypeSale(
+      [FromBody] FilterTypeSale query,
       CancellationToken cancellationToken)
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));
