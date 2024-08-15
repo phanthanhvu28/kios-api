@@ -15,4 +15,6 @@ public record UserBaseDto
     public string? UpdateBy { get; set; }
     public DateTime? UpdateDate { get; set; }
     public List<AuthenMenu> Menus { get; set; } = new List<AuthenMenu>();
+    public List<string> Roles { get; set; } = new List<string>();
+    public List<RoleDto> ModelRoles { get; set; } = new List<RoleDto>();
 }

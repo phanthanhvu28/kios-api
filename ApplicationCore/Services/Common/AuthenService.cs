@@ -33,7 +33,7 @@ public class AuthenService : IAuthenService
                 new Claim("fullname",user.Fullname),
                 new Claim("role","admin"),
                 new Claim("menus", JsonConvert.SerializeObject(user.Menus)),
-                new Claim("storecode","123456789"),
+                new Claim("storecode",user.StoreCode),
             };
         JwtSecurityToken token = new(_config["Jwt:Issuer"],
             _config["Jwt:Audience"],
