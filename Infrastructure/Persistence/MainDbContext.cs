@@ -21,6 +21,7 @@ public class MainDbContext : AppDbContextBase
     public DbSet<TypeBida> TypeBida { get; set; }
     public DbSet<Staffs> Staffs { get; set; }
     public DbSet<AuthenUser> AuthenUser { get; set; }
+    public DbSet<Role> Roles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

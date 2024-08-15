@@ -8,6 +8,8 @@ public record CreateUserDto
     public string Email { get; set; }
     public string Address { get; set; }
     public string Phone { get; set; }
+    public string StoreCode { get; set; }
     public List<AuthenMenu> Menus { get; set; }
+    public List<string> Roles { get; set; }
 
 }

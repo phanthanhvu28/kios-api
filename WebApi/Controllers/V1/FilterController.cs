@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.DTOs.Area;
 using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.DTOs.Company;
+using ApplicationCore.DTOs.Role;
 using ApplicationCore.DTOs.Staff;
 using ApplicationCore.DTOs.Table;
 using ApplicationCore.DTOs.TypeBida;
@@ -8,6 +9,7 @@ using ApplicationCore.DTOs.TypeSale;
 using ApplicationCore.UseCases.Area.Queries;
 using ApplicationCore.UseCases.AuthenUser.Queries;
 using ApplicationCore.UseCases.Company.Queries;
+using ApplicationCore.UseCases.Role.Queries;
 using ApplicationCore.UseCases.Staff.Queries;
 using ApplicationCore.UseCases.Table.Queries;
 using ApplicationCore.UseCases.TypeBida.Queries;
@@ -50,6 +52,19 @@ public class FilterController : AppControllerBase
     [HttpPost("user")]
     public async Task<ActionResult<ResultModel<FilterUserDto>>> FilterUser(
        [FromBody] FilterUser query,
+       CancellationToken cancellationToken)
+    {
+        return ResultResponse(await Mediator.Send(query, cancellationToken));
+    }
+    /// <summary>
+    /// Filter Role
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost("role")]
+    public async Task<ActionResult<ResultModel<FilterRoleDto>>> FilterRole(
+       [FromBody] FilterRole query,
        CancellationToken cancellationToken)
     {
         return ResultResponse(await Mediator.Send(query, cancellationToken));
