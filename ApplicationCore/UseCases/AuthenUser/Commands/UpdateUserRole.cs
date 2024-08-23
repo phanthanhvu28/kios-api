@@ -11,9 +11,9 @@ using VELA.WebCoreBase.Core.PipelineBehaviors;
 using VELA.WebCoreBase.Libraries.Exceptions;
 
 namespace ApplicationCore.UseCases.AuthenUser.Commands;
-public sealed class UpdateUser : UpdateUserModel, VELA.WebCoreBase.Core.Mediators.ICommand<UpdateUserDto>
+public sealed class UpdateUserRole : UpdateUserRoleModel, VELA.WebCoreBase.Core.Mediators.ICommand<UpdateRoleUserDto>
 {
-    public sealed class Handler : ICommandHandler<UpdateUser, ResultModel<UpdateUserDto>>
+    public sealed class Handler : ICommandHandler<UpdateUserRole, ResultModel<UpdateRoleUserDto>>
     {
         private readonly IdentityUserObject? _identityUser;
         private readonly IAuthenUserRepository _authenRepository;
@@ -28,37 +28,33 @@ public sealed class UpdateUser : UpdateUserModel, VELA.WebCoreBase.Core.Mediator
             _authenService = authenService;
 
         }
-        public async ValueTask<ResultModel<UpdateUserDto>> Handle(UpdateUser command, CancellationToken cancellationToken)
+        public async ValueTask<ResultModel<UpdateRoleUserDto>> Handle(UpdateUserRole command, CancellationToken cancellationToken)
         {
             if (_identityUser is null)
             {
-                return ResultModel<UpdateUserDto>.Create(new ValidationException(100036, $"Access deny, you have no permission to update user"));
+                return ResultModel<UpdateRoleUserDto>.Create(new ValidationException(100036, $"Access deny, you have no permission to update role"));
             }
 
             AuthenUserByUsernameSpec authenSpec = new(command.Username);
             Entities.AuthenUser? user = await _authenRepository.FindOneAsync(authenSpec);
             if (user is null)
             {
-                return ResultModel<UpdateUserDto>.Create(new NotFoundException(100036, $"Notfound user:{command.Username} in system"));
+                return ResultModel<UpdateRoleUserDto>.Create(new NotFoundException(100036, $"Notfound user:{command.Username} in system"));
             }
-            user.Fullname = command.Fullname;
-            user.Email = command.Email;
-            user.Address = command.Address;
-            user.Phone = command.Phone;
-            user.StoreCode = command.StoreCode;
 
             user.UpdateBy = _identityUser!.FullName;
             user.UsernameEdit = _identityUser!.Username;
+            user.Roles = command.Roles;
 
             bool result = await _authenRepository.UpdateAsync(user);
             if (!result)
             {
-                return ResultModel<UpdateUserDto>.Create(new ValidationException(100036, $"Update {command.Username} error"));
+                return ResultModel<UpdateRoleUserDto>.Create(new ValidationException(100036, $"Update role for {command.Username} error"));
             }
 
-            UpdateUserDto dto = user.Adapt<UpdateUserDto>();
+            UpdateRoleUserDto dto = user.Adapt<UpdateRoleUserDto>();
 
-            return ResultModel<UpdateUserDto>.Create(dto);
+            return ResultModel<UpdateRoleUserDto>.Create(dto);
         }
     }
 }

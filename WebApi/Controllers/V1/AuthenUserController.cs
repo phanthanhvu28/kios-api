@@ -71,13 +71,26 @@ public class AuthenUserController : AppControllerBase
         ActionResult<ResultModel<UpdateUserDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
-
+    /// <summary>
+    /// Update menu
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpPost("menu/update")]
     public async Task<ActionResult<ResultModel<UpdateMenuDto>>> MenuUpdate(
       [FromBody] UpdateMenu command,
       CancellationToken cancellationToken)
     {
         ActionResult<ResultModel<UpdateMenuDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
+    [HttpPost("role/update")]
+    public async Task<ActionResult<ResultModel<UpdateRoleUserDto>>> UpdateRoleUser(
+     [FromBody] UpdateUserRole command,
+     CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<UpdateRoleUserDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
     /// <summary>

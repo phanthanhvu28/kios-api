@@ -31,7 +31,7 @@ public class AuthenService : IAuthenService
                 new Claim("email",user.Email),
                 new Claim("username",user.Username),
                 new Claim("fullname",user.Fullname),
-                new Claim("role","admin"),
+                new Claim("role",JsonConvert.SerializeObject(user.Roles)),
                 new Claim("menus", JsonConvert.SerializeObject(user.Menus)),
                 new Claim("storecode",user.StoreCode),
             };
