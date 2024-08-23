@@ -52,9 +52,6 @@ public sealed class CreateUser : CreteUserModel, VELA.WebCoreBase.Core.Mediators
             @new.CreateBy = _identityUser!.Username;
             @new.CreateBy = _identityUser!.FullName;
 
-            //@new.Menus = AuthenSite.Site._menus;
-            @new.Menus = command.Menus;
-
             bool result = await _authenRepository.UpdateAsync(@new);
             if (!result)
             {

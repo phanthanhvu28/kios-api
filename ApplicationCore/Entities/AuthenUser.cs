@@ -30,8 +30,5 @@ public class AuthenUser : EntityBase
     public string? Password { get; set; }
 
     [Column(TypeName = "json")]
-    public List<AuthenMenu> Menus { get; set; } = new List<AuthenMenu>();
-
-    [Column(TypeName = "json")]
     public List<string> Roles { get; set; } = new List<string>();
 }

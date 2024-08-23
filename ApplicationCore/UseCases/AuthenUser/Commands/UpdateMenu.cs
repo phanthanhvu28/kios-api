@@ -45,7 +45,6 @@ public sealed class UpdateMenu : UpdateMenuModel, VELA.WebCoreBase.Core.Mediator
             user.UpdateBy = _identityUser!.FullName;
             user.UsernameEdit = _identityUser!.Username;
 
-            user.Menus = command.Menus;
             user.Roles = command.Roles;
 
             bool result = await _authenRepository.UpdateAsync(user);
