@@ -69,4 +69,22 @@ public class TableController : AppControllerBase
         ActionResult<ResultModel<string>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
+    /// <summary>
+    /// Table by Store
+    /// </summary>
+    /// <param name="storeCode"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("table-by-store/{storeCode}")]
+    public async Task<ActionResult<ResultModel<List<TableBaseDto>>>> GetByStore(
+        [FromRoute] string storeCode,
+        CancellationToken cancellationToken)
+    {
+        GetTableByStore query = new()
+        {
+            StoreCode = storeCode
+        };
+        ActionResult<ResultModel<List<TableBaseDto>>> response = ResultResponse(await Mediator.Send(query, cancellationToken));
+        return response;
+    }
 }
