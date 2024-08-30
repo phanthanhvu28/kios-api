@@ -22,6 +22,7 @@ public class MainDbContext : AppDbContextBase
     public DbSet<Staffs> Staffs { get; set; }
     public DbSet<AuthenUser> AuthenUser { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Products> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

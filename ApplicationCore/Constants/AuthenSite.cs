@@ -309,6 +309,39 @@ public struct AuthenSite
                                 FeatureName="Export"
                             }
                         }
+                    },
+                    new MenuSite()
+                    {
+                        SiteCode="Product",
+                        SiteName="Product",
+                        Feature = new List<Feature>()
+                        {
+                            new Feature()
+                            {
+                                FeatureCode="View",
+                                FeatureName="View"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Add",
+                                FeatureName="Add"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Edit",
+                                FeatureName="Edit"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Del",
+                                FeatureName="Del"
+                            },
+                            new Feature()
+                            {
+                                FeatureCode="Export",
+                                FeatureName="Export"
+                            }
+                        }
                     }
                 }
             },
