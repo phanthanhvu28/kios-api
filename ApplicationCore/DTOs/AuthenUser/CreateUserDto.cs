@@ -9,6 +9,9 @@ public record CreateUserDto
     public string Address { get; set; }
     public string Phone { get; set; }
     public string StoreCode { get; set; }
+    public string StoreName { get; set; }
+    public string CompanyCode { get; set; }
+    public string CompanyName { get; set; }
     public List<AuthenMenu> Menus { get; set; }
     public List<string> Roles { get; set; }
 

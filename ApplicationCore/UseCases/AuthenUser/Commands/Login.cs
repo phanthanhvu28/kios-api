@@ -3,7 +3,9 @@ using ApplicationCore.DTOs.AuthenUser;
 using ApplicationCore.Entities.Common;
 using ApplicationCore.Services.Common;
 using ApplicationCore.Specifications.AuthenUser;
+using ApplicationCore.Specifications.Company;
 using ApplicationCore.Specifications.Role;
+using ApplicationCore.Specifications.Store;
 using ApplicationCore.UseCases.AuthenUser.Models;
 using Mapster;
 using Mediator;
@@ -16,14 +18,20 @@ public sealed class Login : UserModel, VELA.WebCoreBase.Core.Mediators.ICommand<
     public sealed class Handler : ICommandHandler<Login, ResultModel<LoginDto>>
     {
         private readonly IAuthenUserRepository _authenRepository;
+        private readonly IStoreRepository _storeRepository;
+        private readonly ICompanyRepository _companyRepository;
         private readonly IRoleRepository _roleRepository;
         private readonly IAuthenService _authenService;
         public Handler(
             IAuthenUserRepository authenRepository,
+            IStoreRepository storeRepository,
+            ICompanyRepository companyRepository,
             IRoleRepository roleRepository,
             IAuthenService authenService)
         {
             _authenRepository = authenRepository;
+            _storeRepository = storeRepository;
+            _companyRepository = companyRepository;
             _roleRepository = roleRepository;
             _authenService = authenService;
         }
@@ -44,6 +52,22 @@ public sealed class Login : UserModel, VELA.WebCoreBase.Core.Mediators.ICommand<
             List<Entities.Role> roles = await _roleRepository.FindAsync(roleArraySpec);
 
             CreateUserDto userDto = user.Adapt<CreateUserDto>();
+
+            StoreByCodeSpec storeSpec = new(user.StoreCode!);
+            Entities.Stores? store = await _storeRepository.FindOneAsync(storeSpec);
+            if (store is not null)
+            {
+                userDto.CompanyCode = store.CompanyCode;
+                userDto.StoreName = store.Name;
+            }
+
+            CompanyByCodeSpec companySpec = new(userDto.CompanyCode);
+            Entities.Companies? company = await _companyRepository.FindOneAsync(companySpec);
+            if (company is not null)
+            {
+                userDto.CompanyName = company.Name;
+            }
+
 
             // List of arrays to merge   
             if (roles is { Count: > 0 })

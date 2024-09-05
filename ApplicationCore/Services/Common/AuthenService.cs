@@ -31,14 +31,17 @@ public class AuthenService : IAuthenService
                 new Claim("email",user.Email),
                 new Claim("username",user.Username),
                 new Claim("fullname",user.Fullname),
-                new Claim("role",JsonConvert.SerializeObject(user.Roles)),
+                new Claim("roles",JsonConvert.SerializeObject(user.Roles)),
                 new Claim("menus", JsonConvert.SerializeObject(user.Menus)),
                 new Claim("storecode",user.StoreCode),
+                new Claim("storename",user.StoreName),
+                new Claim("companycode",user.CompanyCode),
+                new Claim("companyname",user.CompanyName),
             };
         JwtSecurityToken token = new(_config["Jwt:Issuer"],
             _config["Jwt:Audience"],
             claims,
-            expires: DateTime.Now.AddMicroseconds(43200),
+            expires: DateTime.Now.AddMilliseconds(43200),
             signingCredentials: credentials);
 
 
