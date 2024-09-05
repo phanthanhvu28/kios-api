@@ -12,5 +12,6 @@ public struct Prefix
     public const string TypeSale = "TSA";
     public const string Staff = "STA";
     public const string Role = "ROL";
+    public const string Payment = "PAY";
 
 }

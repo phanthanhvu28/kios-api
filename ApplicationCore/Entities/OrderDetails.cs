@@ -24,6 +24,7 @@ public class OrderDetails : EntityBaseCode, IKiosProcess
 
     [Column(TypeName = "decimal(9, 2)")]
     public decimal UnitPrice { get; set; }
+
     [Column(TypeName = "decimal(9, 2)")]
     public decimal Amount { get; set; }
 
