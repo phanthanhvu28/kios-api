@@ -9,7 +9,7 @@ public record IdentityUserObject
     public string CompanyCode { get; init; }
     public string StaffCode { get; init; }
     public string StoreCode { get; init; }
-    public string Username { get; init; }
+    public string Username { get; init; }//username
     public string Menus { get; init; }
 
     public int ApprovalLevel { get; set; }

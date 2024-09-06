@@ -24,6 +24,7 @@ public class MainDbContext : AppDbContextBase
     public DbSet<Role> Roles { get; set; }
     public DbSet<Products> Products { get; set; }
     public DbSet<Payments> Payments { get; set; }
+    public DbSet<SetupPrice> SetupPrices { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
