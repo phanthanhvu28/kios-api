@@ -10,7 +10,7 @@ public abstract class EntityBase : IEntityRoot, ITraceRequest
     public long Id { get; init; }
 
     [Column(TypeName = "varchar(100)")]
-    public string Status { get; set; } = Constants.Kios.Status.Active;
+    public string? Status { get; set; }
 
     [Column(TypeName = "varchar(100)")]
     public string? Username { get; set; }

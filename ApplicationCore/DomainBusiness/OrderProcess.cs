@@ -4,10 +4,10 @@ using OneOf;
 using VELA.WebCoreBase.Libraries.Exceptions;
 
 namespace ApplicationCore.DomainBusiness;
-public class CreateNewProcess : ProcessBase, IWorkflowProcess
+public class OrderProcess : ProcessBase, IWorkflowProcess
 {
 
-    public CreateNewProcess(
+    public OrderProcess(
         IdentityUserObject? identityUser) : base(identityUser)
     {
     }
@@ -23,7 +23,7 @@ public class CreateNewProcess : ProcessBase, IWorkflowProcess
         {
             return new ForbiddenActionException(100006, "create new");
         }
-        process.Status = Constants.Contract.Status.Active;
+        process.Status = Constants.Contract.Status.New;
 
         process.ActivitiesHistory.Add(
             new Entities.Common.ActivitiesHistory

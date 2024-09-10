@@ -5,6 +5,7 @@ using VELA.WebCoreBase.Libraries.Exceptions;
 namespace ApplicationCore.Contracts.Domains;
 public interface IKiosProcess
 {
+    public string? Status { get; set; }
     public string? CreateBy { get; set; }
     public string? Username { get; set; }
     public string? UpdateBy { get; set; }
