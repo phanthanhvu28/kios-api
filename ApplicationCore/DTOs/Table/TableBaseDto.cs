@@ -20,4 +20,12 @@ public record TableBaseDto
     public DateTime CreateDate { get; set; }
     public string? UpdateBy { get; set; }
     public DateTime? UpdateDate { get; set; }
+    public OrderPick? Order { get; set; }
+}
+public record OrderPick
+{
+    public string OrderCode { get; set; }
+    public string Status { get; set; }
+    public decimal TotalCost { get; set; }
+
 }
