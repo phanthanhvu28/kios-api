@@ -1,4 +1,5 @@
-﻿using ApplicationCore.UseCases.Order.Commands;
+﻿using ApplicationCore.DTOs.Order;
+using ApplicationCore.UseCases.Order.Commands;
 using Microsoft.AspNetCore.Mvc;
 using VELA.WebCoreBase.Core.Controllers;
 using VELA.WebCoreBase.Core.Models;
@@ -19,11 +20,11 @@ public class OrderController : AppControllerBase
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [HttpPost("create")]
-    public async Task<ActionResult<ResultModel<bool>>> Create(
+    public async Task<ActionResult<ResultModel<CreateOrderDto>>> Create(
     [FromBody] CreateOrder command,
     CancellationToken cancellationToken)
     {
-        ActionResult<ResultModel<bool>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        ActionResult<ResultModel<CreateOrderDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
 }

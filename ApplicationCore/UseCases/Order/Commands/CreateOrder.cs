@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.RepositoryBase;
 using ApplicationCore.DomainBusiness;
+using ApplicationCore.DTOs.Order;
 using ApplicationCore.Specifications.Order;
 using ApplicationCore.UseCases.Order.Models;
 using ApplicationCore.ValueObjects;
@@ -11,9 +12,9 @@ using VELA.WebCoreBase.Core.PipelineBehaviors;
 using VELA.WebCoreBase.Libraries.Exceptions;
 
 namespace ApplicationCore.UseCases.Order.Commands;
-public sealed class CreateOrder : CreateOrderModel, VELA.WebCoreBase.Core.Mediators.ICommand<bool>
+public sealed class CreateOrder : CreateOrderModel, VELA.WebCoreBase.Core.Mediators.ICommand<CreateOrderDto>
 {
-    public sealed class Handler : ICommandHandler<CreateOrder, ResultModel<bool>>
+    public sealed class Handler : ICommandHandler<CreateOrder, ResultModel<CreateOrderDto>>
     {
         private readonly IdentityUserObject? _identityUser;
         private readonly IOrderRepository _orderRepository;
@@ -26,7 +27,7 @@ public sealed class CreateOrder : CreateOrderModel, VELA.WebCoreBase.Core.Mediat
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
         }
-        public async ValueTask<ResultModel<bool>> Handle(CreateOrder command, CancellationToken cancellationToken)
+        public async ValueTask<ResultModel<CreateOrderDto>> Handle(CreateOrder command, CancellationToken cancellationToken)
         {
             Entities.Orders order = command.Adapt<Entities.Orders>();
 
@@ -37,7 +38,7 @@ public sealed class CreateOrder : CreateOrderModel, VELA.WebCoreBase.Core.Mediat
                 OneOf<bool, CommonExceptionBase, Entities.Orders> orderResult = await NewOrder(command);
                 if (orderResult.IsT1)
                 {
-                    return ResultModel<bool>.Create(orderResult.AsT1);
+                    return ResultModel<CreateOrderDto>.Create(orderResult.AsT1);
                 }
 
                 order = orderResult.AsT2;
@@ -45,7 +46,7 @@ public sealed class CreateOrder : CreateOrderModel, VELA.WebCoreBase.Core.Mediat
                 OneOf<bool, CommonExceptionBase> orderDetailResult = await NewOrderDetail(order.Code, command.OrderDetail);
                 if (orderDetailResult.IsT1)
                 {
-                    return ResultModel<bool>.Create(orderDetailResult.AsT1);
+                    return ResultModel<CreateOrderDto>.Create(orderDetailResult.AsT1);
                 }
 
             }
@@ -54,7 +55,7 @@ public sealed class CreateOrder : CreateOrderModel, VELA.WebCoreBase.Core.Mediat
                 OneOf<bool, CommonExceptionBase> orderDetailResult = await NewOrderDetail(orderCheck.Code, command.OrderDetail);
                 if (orderDetailResult.IsT1)
                 {
-                    return ResultModel<bool>.Create(orderDetailResult.AsT1);
+                    return ResultModel<CreateOrderDto>.Create(orderDetailResult.AsT1);
                 }
                 order = orderCheck;
             }
@@ -66,7 +67,9 @@ public sealed class CreateOrder : CreateOrderModel, VELA.WebCoreBase.Core.Mediat
             order.TotalCost = totalCost;
             _ = await _orderRepository.UpdateAsync(order);
 
-            return ResultModel<bool>.Create(true);
+            CreateOrderDto resultDto = order.Adapt<CreateOrderDto>();
+
+            return ResultModel<CreateOrderDto>.Create(resultDto);
         }
         private async ValueTask<OneOf<bool, CommonExceptionBase, Entities.Orders>> NewOrder(
             CreateOrder command)
