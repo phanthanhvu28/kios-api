@@ -1,5 +1,7 @@
 ﻿using ApplicationCore.DTOs.Order;
+using ApplicationCore.DTOs.OrderDetail;
 using ApplicationCore.UseCases.Order.Commands;
+using ApplicationCore.UseCases.Order.Queries;
 using Microsoft.AspNetCore.Mvc;
 using VELA.WebCoreBase.Core.Controllers;
 using VELA.WebCoreBase.Core.Models;
@@ -25,6 +27,25 @@ public class OrderController : AppControllerBase
     CancellationToken cancellationToken)
     {
         ActionResult<ResultModel<CreateOrderDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
+
+    /// <summary>
+    /// Detail
+    /// </summary>
+    /// <param name="orderCode"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("{orderCode}")]
+    public async Task<ActionResult<ResultModel<OrderDetailDto>>> Detail(
+        [FromRoute] string orderCode,
+        CancellationToken cancellationToken)
+    {
+        DetailOrder query = new()
+        {
+            OrderCode = orderCode,
+        };
+        ActionResult<ResultModel<OrderDetailDto>> response = ResultResponse(await Mediator.Send(query, cancellationToken));
         return response;
     }
 }
