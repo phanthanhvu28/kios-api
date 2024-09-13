@@ -1,9 +1,9 @@
 ﻿namespace ApplicationCore.UseCases.Order.Models;
 public class CreateOrderModel
 {
-    public string? OrderCode { get; set; }
-    public string? StoreCode { get; set; }
-    public string? TableCode { get; set; }
+    public string OrderCode { get; set; }
+    public string StoreCode { get; set; }
+    public string TableCode { get; set; }
     public string? StaffCode { get; set; }
 
     //public string? ProductCode { get; set; }
