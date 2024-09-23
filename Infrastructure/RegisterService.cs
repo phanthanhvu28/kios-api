@@ -41,6 +41,7 @@ public static class RegisterService
         services.AddScoped<ITypeSaleRepository, TypeSaleRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IAuthenUserRepository, AuthenUserRepository>();
+        services.AddScoped<IPaymentRepository, PaymentRepository>();
 
         return services;
     }

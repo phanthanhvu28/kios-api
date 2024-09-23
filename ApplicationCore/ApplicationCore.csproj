@@ -30,6 +30,7 @@
 	<ItemGroup>
 	  <Folder Include="Contracts\ServiceBase\" />
 	  <Folder Include="DomainEvents\" />
+	  <Folder Include="UseCases\Payment\Queries\" />
 	  <Folder Include="UseCases\UnitPrice\Commands\" />
 	  <Folder Include="UseCases\UnitPrice\Models\" />
 	</ItemGroup>
