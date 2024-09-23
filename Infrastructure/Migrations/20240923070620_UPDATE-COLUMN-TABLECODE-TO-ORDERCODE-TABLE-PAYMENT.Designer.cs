@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240923070620_UPDATE-COLUMN-TABLECODE-TO-ORDERCODE-TABLE-PAYMENT")]
+    partial class UPDATECOLUMNTABLECODETOORDERCODETABLEPAYMENT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -415,10 +418,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Status")
                         .HasColumnType("varchar(100)");
-
-                    b.Property<string>("StoreCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("TraceId")
                         .HasColumnType("varchar(100)");

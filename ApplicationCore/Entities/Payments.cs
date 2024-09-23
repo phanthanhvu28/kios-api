@@ -12,7 +12,10 @@ namespace ApplicationCore.Entities;
 public class Payments : EntityBaseCode, IKiosProcess
 {
     [Column(TypeName = "varchar(50)")]
-    public string TableCode { get; set; }
+    public string StoreCode { get; set; }
+
+    [Column(TypeName = "varchar(50)")]
+    public string OrderCode { get; set; }
     public DateTime PaymentDate { get; set; }
 
     [Column(TypeName = "decimal(9,2)")]
