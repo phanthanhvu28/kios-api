@@ -10,5 +10,5 @@ public class CreteUserModel
     public string Address { get; set; }
     public string Phone { get; set; }
     public List<AuthenMenu> Menus { get; set; } = new List<AuthenMenu>();
-    public List<string> Roles { get; set; }
+    //public List<string> Roles { get; set; }
 }
