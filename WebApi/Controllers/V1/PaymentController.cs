@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.DTOs.Payment;
 using ApplicationCore.UseCases.Payment.Commands;
+using ApplicationCore.UseCases.Payment.Queries;
 using Microsoft.AspNetCore.Mvc;
 using VELA.WebCoreBase.Core.Controllers;
 using VELA.WebCoreBase.Core.Models;
@@ -14,7 +15,7 @@ namespace WebApi.Controllers.V1;
 public class PaymentController : AppControllerBase
 {
     /// <summary>
-    /// Payment
+    /// Create
     /// </summary>
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
@@ -25,6 +26,38 @@ public class PaymentController : AppControllerBase
     CancellationToken cancellationToken)
     {
         ActionResult<ResultModel<CreatePaymentDto>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
+    /// <summary>
+    /// Get Payment
+    /// </summary>
+    /// <param name="orderCode"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("{orderCode}")]
+    public async Task<ActionResult<ResultModel<List<GetPaymentDto>>>> Detail(
+       [FromRoute] string orderCode,
+       CancellationToken cancellationToken)
+    {
+        GetPayment query = new()
+        {
+            OrderCode = orderCode,
+        };
+        ActionResult<ResultModel<List<GetPaymentDto>>> response = ResultResponse(await Mediator.Send(query, cancellationToken));
+        return response;
+    }
+    /// <summary>
+    /// Delete
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpDelete("delete")]
+    public async Task<ActionResult<ResultModel<string>>> Delete(
+    [FromBody] DeletePayment command,
+    CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<string>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
         return response;
     }
 }
