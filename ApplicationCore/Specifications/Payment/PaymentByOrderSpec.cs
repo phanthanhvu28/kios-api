@@ -7,5 +7,6 @@ public class PaymentByOrderSpec : SpecificationBase<Entities.Payments>
     {
         ApplyFilter(entity => entity.OrderCode == orderCode);
         ApplyFilter(entity => entity.IsDelete == false);
+        ApplySort("CreateDateDesc");
     }
 }

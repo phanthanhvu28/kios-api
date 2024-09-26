@@ -48,4 +48,18 @@ public class OrderController : AppControllerBase
         ActionResult<ResultModel<OrderDetailDto>> response = ResultResponse(await Mediator.Send(query, cancellationToken));
         return response;
     }
+    /// <summary>
+    /// Delete Item
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpDelete("delete")]
+    public async Task<ActionResult<ResultModel<string>>> Delete(
+       [FromBody] DeleteOrderItem command,
+       CancellationToken cancellationToken)
+    {
+        ActionResult<ResultModel<string>> response = ResultResponse(await Mediator.Send(command, cancellationToken));
+        return response;
+    }
 }
